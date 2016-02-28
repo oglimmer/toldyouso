@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>AndIToldYou.so</title>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body style="padding-top: 10px; padding-bottom: 20px;">
+	<b:navBar brand="AndIToldYou.so" brandHref="#" inverse="true"
+		fixed="top">
+	</b:navBar>
+	<b:jumbotron>
+		<b:container>
+			<h1>and i told you.so</h1>
+			<p>Being a smart ass? Ever wanted to keep evidence of a "and I
+				knew it" situation? Now you can proof people that ... AND I TOLD YOU
+				SO!</p>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+		<b:row>
+			<b:column col-md="12">
+				<h2>Create evidence</h2>
+				<p>
+					<h:form styleClass="">
+						<b:inputText placeholder="Text" fieldSize="sm" />
+						<b:inputText placeholder="Your email" fieldSize="sm" />
+					</h:form>
+				</p>
+				<p>
+					<b:button outcome="" value="save »" />
+				</p>
+			</b:column>
+		</b:row>
+		<hr />
+		<footer>
+			<p>Build by oglimmer.de 2016</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>
