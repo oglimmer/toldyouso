@@ -24,7 +24,7 @@
 		<b:row rendered="#{not empty saveEntryPortal.message}">
 			<b:column col-md="12">
 				<b:alert severity="success" closable="true">
-					#{saveEntryPortal.message}
+					<h:outputText value="#{saveEntryPortal.message}" escape="false" />
 				</b:alert>
 			</b:column>
 		</b:row>

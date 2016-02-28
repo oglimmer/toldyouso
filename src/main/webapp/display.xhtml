@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>AndIToldYou.so</title>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body style="padding-top: 10px; padding-bottom: 20px;">
+	<b:navBar brand="AndIToldYou.so" brandHref="#" inverse="true"
+		fixed="top">
+	</b:navBar>
+	<b:jumbotron>
+		<b:container>
+			<h1>and i told you.so</h1>
+			<p>Being a smart ass? Ever wanted to keep evidence of a "and I
+				knew it" situation? Store your early wisdom and keep a proof to people that you had known it ... AND I TOLD YOU
+				SO!</p>
+		</b:container>
+	</b:jumbotron>
+	<b:container>
+		<b:row>
+			<b:column col-md="12">
+				<h2>Show evidence</h2>
+			</b:column>
+		</b:row>
+		<b:row>
+			<b:column col-md="12">
+				<h3><h:outputText value="#{getEntryPortal.smartAssEntry.fact}" /></h3>
+			</b:column>
+		</b:row>
+		<b:row>
+			<b:column col-md="6">
+				This was created on <h:outputText value="#{getEntryPortal.smartAssEntry.creationDate}" />
+			</b:column>
+			<b:column col-md="6" rendered="#{not empty getEntryPortal.smartAssEntry.email}">				
+				by <h:outputText value="#{getEntryPortal.smartAssEntry.email}" />
+			</b:column>
+		</b:row>
+		<hr />
+		<footer>
+			<p>Build by oglimmer.de 2016</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

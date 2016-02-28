@@ -11,6 +11,7 @@ import de.oglimmer.db.couchdb.CouchDbUtil;
 import de.oglimmer.db.couchdb.SmartAssEntryCouchDb;
 import de.oglimmer.model.SmartAssEntry;
 import de.oglimmer.util.EmailService;
+import de.oglimmer.util.LinkGenerator;
 import lombok.Getter;
 
 @RequestScoped
@@ -32,12 +33,15 @@ public class SaveEntryPortal implements Serializable {
 		SmartAssEntryDao dao = new SmartAssEntryCouchDb(CouchDbUtil.getDatabase());
 		dao.add(smartAssEntry);
 
+		String link = "<a href='" + LinkGenerator.INSTANCE.make(smartAssEntry.getId()) + "'>"
+				+ LinkGenerator.INSTANCE.make(smartAssEntry.getId()) + "</a>";
+
 		if (smartAssEntry.getEmail() != null && !smartAssEntry.getEmail().isEmpty()) {
 			EmailService.INSTANCE.createAndSendMailFile(smartAssEntry.getEmail(), "anditoldyou.so record",
-					"/creationEmail.txt", smartAssEntry.getId());
-			message = "Wisdom saved. We've sent you an email. Here's the link as well: xxxx" + smartAssEntry.getId();
+					"/creationEmail.txt", smartAssEntry.getFact(), LinkGenerator.INSTANCE.make(smartAssEntry.getId()));
+			message = "Wisdom saved. We've sent you an email. Here's the link as well: " + link;
 		} else {
-			message = "Wisdom saved. Here's the link for future references: xxxx" + smartAssEntry.getId();
+			message = "Wisdom saved. Here's the link for future references: " + link + ". Keep it safe!";
 		}
 
 		smartAssEntry = new SmartAssEntry();

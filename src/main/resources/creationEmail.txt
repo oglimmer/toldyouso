@@ -1,6 +1,8 @@
 Hello,
 
-this is recorded:
+the fact %s is now recorded.
 
-http://anditoldyou.so/%s
+You can retrieve it via:
+
+%s
 

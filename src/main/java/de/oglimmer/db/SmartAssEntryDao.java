@@ -6,4 +6,6 @@ public interface SmartAssEntryDao {
 
 	void add(SmartAssEntry smartAssEntry);
 
+	SmartAssEntry get(String id);
+
 }
