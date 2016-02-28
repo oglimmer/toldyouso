@@ -16,24 +16,38 @@
 		<b:container>
 			<h1>and i told you.so</h1>
 			<p>Being a smart ass? Ever wanted to keep evidence of a "and I
-				knew it" situation? Now you can proof people that ... AND I TOLD YOU
+				knew it" situation? Store your early wisdom and keep a proof to people that you had known it ... AND I TOLD YOU
 				SO!</p>
 		</b:container>
-
 	</b:jumbotron>
 	<b:container>
+		<b:row rendered="#{not empty saveEntryPortal.message}">
+			<b:column col-md="12">
+				<b:alert severity="success" closable="true">
+					#{saveEntryPortal.message}
+				</b:alert>
+			</b:column>
+		</b:row>
 		<b:row>
 			<b:column col-md="12">
 				<h2>Create evidence</h2>
-				<p>
-					<h:form styleClass="">
-						<b:inputText placeholder="Text" fieldSize="sm" />
-						<b:inputText placeholder="Your email" fieldSize="sm" />
-					</h:form>
-				</p>
-				<p>
-					<b:button outcome="" value="save »" />
-				</p>
+				<h:form id="form0">
+					<p>
+						<b:message for="fact"/>
+						<b:inputTextarea id="fact" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.fact}" required="true"
+							requiredMessage="This must not be empty."
+							placeholder="Describe here what you already know, but someone else (currently) doesn't believe." />
+						<b:message for="email"/>
+						<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}" 
+							validatorMessage="This is not a valid email address" >
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</b:inputText>
+					</p>
+					<p>
+						<b:commandButton value="Save »" action="#{saveEntryPortal.save()}" onclick="void(null);">
+	    				</b:commandButton>
+					</p>
+				</h:form>
 			</b:column>
 		</b:row>
 		<hr />
