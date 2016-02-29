@@ -21,6 +21,10 @@ public enum Configuration {
 		}
 	}
 
+	public String getDomain() {
+		return prop.getProperty("toldyouso.domain", "http://anditoldyou.so");
+	}
+
 	public String getCouchDbHost() {
 		return prop.getProperty("couchdb.host", "localhost");
 	}
