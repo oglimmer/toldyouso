@@ -1,4 +1,4 @@
-package de.oglimmer.web;
+package de.oglimmer.web.beans;
 
 import java.io.Serializable;
 import java.util.Map;
