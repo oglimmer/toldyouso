@@ -9,52 +9,53 @@
 </h:head>
 <!-- Add 50px padding top to the body for the navbar -->
 <h:body style="padding-top: 10px; padding-bottom: 20px;">
-	<b:navBar brand="AndIToldYou.so" brandHref="#" inverse="true"
-		fixed="top">
-	</b:navBar>
-	<b:jumbotron>
+	<f:view transient="true">
+		<b:navBar brand="AndIToldYou.so" brandHref="#" inverse="true"
+			fixed="top">
+		</b:navBar>
+		<b:jumbotron>
+			<b:container>
+				<h1>and i told you.so</h1>
+				<p>Ever wanted to keep evidence of an "and I
+					knew it" situation? Save your early wisdom with an unmodifiable date and time and so 
+					secure a proof that you had known it ... and tell'em: AND I TOLD YOU SO!</p>
+			</b:container>
+		</b:jumbotron>
 		<b:container>
-			<h1>and i told you.so</h1>
-			<p>Ever wanted to keep evidence of an "and I
-				knew it" situation? Save your early wisdom with an unmodifiable date and time and so 
-				secure a proof that you had known it ... and tell'em: AND I TOLD YOU SO!</p>
+			<b:row rendered="#{not empty saveEntryPortal.message}">
+				<b:column col-md="12">
+					<b:alert severity="success" closable="true">
+						<h:outputText value="#{saveEntryPortal.message}" escape="false" />
+					</b:alert>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column col-md="12">
+					<h2>Create evidence</h2>
+					<h:form id="form0">
+						<p>
+							<b:message for="fact"/>
+							<b:inputTextarea id="fact" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.fact}" required="true"
+								requiredMessage="This must not be empty."
+								placeholder="Describe here what you already know, but someone else (currently) doesn't believe." />
+							<b:message for="email"/>
+							<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}" 
+								validatorMessage="This is not a valid email address" >
+								<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</b:inputText>
+						</p>
+						<p>
+							<b:commandButton value="Save »" action="#{saveEntryPortal.save()}" onclick="void(null);">
+		    				</b:commandButton>
+						</p>
+					</h:form>
+				</b:column>
+			</b:row>
+			<hr />
+			<footer>
+				<p>Build by oglimmer.de 2016</p>
+			</footer>
 		</b:container>
-	</b:jumbotron>
-	<b:container>
-		<b:row rendered="#{not empty saveEntryPortal.message}">
-			<b:column col-md="12">
-				<b:alert severity="success" closable="true">
-					<h:outputText value="#{saveEntryPortal.message}" escape="false" />
-				</b:alert>
-			</b:column>
-		</b:row>
-		<b:row>
-			<b:column col-md="12">
-				<h2>Create evidence</h2>
-				<h:form id="form0">
-					<p>
-						<b:message for="fact"/>
-						<b:inputTextarea id="fact" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.fact}" required="true"
-							requiredMessage="This must not be empty."
-							placeholder="Describe here what you already know, but someone else (currently) doesn't believe." />
-						<b:message for="email"/>
-						<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}" 
-							validatorMessage="This is not a valid email address" >
-							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-						</b:inputText>
-					</p>
-					<p>
-						<b:commandButton value="Save »" action="#{saveEntryPortal.save()}" onclick="void(null);">
-	    				</b:commandButton>
-					</p>
-				</h:form>
-			</b:column>
-		</b:row>
-		<hr />
-		<footer>
-			<p>Build by oglimmer.de 2016</p>
-		</footer>
-	</b:container>
-
+	</f:view>
 </h:body>
 </html>
