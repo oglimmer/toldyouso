@@ -32,15 +32,15 @@
 			<b:row>
 				<b:column col-md="12">
 					<h2>Create evidence</h2>
-					<h:form id="form0">
+					<h:form>
 						<p>
-							<b:message for="fact"/>
 							<b:inputTextarea id="fact" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.fact}" required="true"
-								requiredMessage="This must not be empty."
-								placeholder="Describe here what you already know, but someone else (currently) doesn't believe." />
-							<b:message for="email"/>
-							<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}" 
-								validatorMessage="This is not a valid email address" >
+								placeholder="Describe here what you already know, but someone else (currently) doesn't believe." >
+								<b:message for="fact"/>
+								<f:validateLength maximum="10000" minimum="5"/>
+							</b:inputTextarea>
+							<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}">
+								<b:message for="email"/>
 								<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							</b:inputText>
 						</p>

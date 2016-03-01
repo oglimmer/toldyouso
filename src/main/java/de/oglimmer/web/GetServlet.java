@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/*")
+@WebServlet(urlPatterns = "/")
 public class GetServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -19,9 +19,10 @@ public class GetServlet extends HttpServlet {
 		String contextPath = req.getContextPath();
 		String s = uri.substring(uri.indexOf(contextPath) + contextPath.length());
 		if (s.isEmpty() || s.equals("/")) {
-			resp.sendRedirect(contextPath + "/faces/index.xhtml");
+			req.getRequestDispatcher("/faces/index.xhtml").forward(req, resp);
 		} else {
-			resp.sendRedirect(contextPath + "/faces/display.xhtml?id=" + s.substring(1));
+			req.setAttribute("id", s.substring(1));
+			req.getRequestDispatcher("/faces/display.xhtml").forward(req, resp);
 		}
 
 	}
