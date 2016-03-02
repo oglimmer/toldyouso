@@ -1,6 +1,5 @@
 package de.oglimmer.web.beans;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Date;
@@ -11,7 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.ServletContext;
 
 import lombok.Getter;
 
@@ -24,12 +22,11 @@ public class VersionInfo {
 
 	@PostConstruct
 	public void init() {
-		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext()
-				.getContext();
 		String commit;
 		String version;
 		String creationDate;
-		try (InputStream is = new FileInputStream(servletContext.getRealPath("/META-INF/MANIFEST.MF"))) {
+		try (InputStream is = FacesContext.getCurrentInstance().getExternalContext()
+				.getResourceAsStream("/META-INF/MANIFEST.MF")) {
 			Manifest mf = new Manifest(is);
 			Attributes attr = mf.getMainAttributes();
 			commit = attr.getValue("SVN-Revision-No");

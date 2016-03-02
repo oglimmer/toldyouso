@@ -49,7 +49,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.6</version>
 				<executions>
 					<execution>
 						<goals>
@@ -58,7 +58,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<archiveClasses>true</archiveClasses>
+					<!-- true is not compabtible with tomcat 7.0.52 (as in 14.04) -->
+					<archiveClasses>false</archiveClasses>
 					<archive>
 						<manifestEntries>
 							<SVN-Revision-No>${buildNumber}</SVN-Revision-No>
