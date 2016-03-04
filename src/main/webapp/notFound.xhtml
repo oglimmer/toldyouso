@@ -4,10 +4,6 @@
 	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<f:metadata>
-	<f:viewParam name="id" value="#{getEntryPortal.id}" />
-	<f:viewAction action="#{getEntryPortal.load}"/>
-</f:metadata>
 <h:head>
 	<title>AndIToldYou.so</title>
 </h:head>
@@ -27,20 +23,7 @@
 	<b:container>
 		<b:row>
 			<b:column col-md="12">
-				<h2>Show evidence</h2>
-			</b:column>
-		</b:row>
-		<b:row>
-			<b:column col-md="12">
-				<h3><h:outputText value="#{getEntryPortal.smartAssEntry.fact}" /></h3>
-			</b:column>
-		</b:row>
-		<b:row>
-			<b:column col-md="6">
-				This was created on <h:outputText value="#{getEntryPortal.smartAssEntry.creationDate}" />
-			</b:column>
-			<b:column col-md="6" rendered="#{not empty getEntryPortal.smartAssEntry.email}">				
-				by <h:outputText value="#{getEntryPortal.smartAssEntry.email}" />
+				<h2>Evidence not found.</h2>
 			</b:column>
 		</b:row>
 		<hr />

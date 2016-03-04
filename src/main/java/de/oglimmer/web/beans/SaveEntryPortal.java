@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.oglimmer.db.SmartAssEntryDao;
-import de.oglimmer.db.couchdb.CouchDbUtil;
-import de.oglimmer.db.couchdb.SmartAssEntryCouchDb;
 import de.oglimmer.model.SmartAssEntry;
 import de.oglimmer.util.EmailService;
 import de.oglimmer.util.LinkGenerator;
@@ -20,6 +19,9 @@ public class SaveEntryPortal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private SmartAssEntryDao dao;
+
 	@Getter
 	private String message;
 
@@ -30,7 +32,6 @@ public class SaveEntryPortal implements Serializable {
 	public String save() {
 		smartAssEntry.setCreationDate(new Date());
 
-		SmartAssEntryDao dao = new SmartAssEntryCouchDb(CouchDbUtil.getDatabase());
 		dao.add(smartAssEntry);
 
 		String link = "<a href='" + LinkGenerator.INSTANCE.make(smartAssEntry.getId()) + "'>"
