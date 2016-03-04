@@ -1,36 +1,15 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/html/base.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<title>AndIToldYou.so</title>
-</h:head>
-<!-- Add 50px padding top to the body for the navbar -->
-<h:body style="padding-top: 10px; padding-bottom: 20px;">
-	<b:navBar brand="AndIToldYou.so" brandHref="#" inverse="true"
-		fixed="top">
-	</b:navBar>
-	<b:jumbotron>
-		<b:container>
-			<h1>and i told you.so</h1>
-			<p>Ever wanted to keep evidence of an "and I
-				knew it" situation? Save your early wisdom with an unmodifiable date and time and so 
-				secure a proof that you had known it ... and tell'em: AND I TOLD YOU SO!</p>
-		</b:container>
-	</b:jumbotron>
-	<b:container>
-		<b:row>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="content">      
+        <b:row>
 			<b:column col-md="12">
 				<h2>Evidence not found.</h2>
 			</b:column>
-		</b:row>
-		<hr />
-		<footer>
-			<p>Build by oglimmer.de 2016 - #{versionInfo.longVersion}</p>
-		</footer>
-	</b:container>
-
-</h:body>
-</html>
+		</b:row>        
+    </ui:define>
+</ui:composition>
