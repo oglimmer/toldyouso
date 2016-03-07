@@ -45,11 +45,15 @@ public class SaveEntryPortal implements Serializable {
 			smartAssEntry.setCreatorId(loginData.getUser().getId());
 		}
 
+		String factInEmail;
 		if (crypted) {
 			String cryptedFact = Crypto.INSTANCE.cryptFact(smartAssEntry.getFact(), loginData.getPassword(),
 					loginData.getUser().getFactPassword(), loginData.getUser().getInitVector());
 			smartAssEntry.setFact(cryptedFact);
 			smartAssEntry.setEncrypted(true);
+			factInEmail = "***ENCRYPTED***";
+		} else {
+			factInEmail = smartAssEntry.getFact();
 		}
 
 		dao.add(smartAssEntry);
@@ -59,7 +63,7 @@ public class SaveEntryPortal implements Serializable {
 
 		if (smartAssEntry.getEmail() != null && !smartAssEntry.getEmail().isEmpty()) {
 			EmailService.INSTANCE.createAndSendMailFile(smartAssEntry.getEmail(), "anditoldyou.so record",
-					"/creationEmail.txt", smartAssEntry.getFact(), LinkGenerator.INSTANCE.make(smartAssEntry.getId()));
+					"/creationEmail.txt", factInEmail, LinkGenerator.INSTANCE.make(smartAssEntry.getId()));
 			message = "Wisdom saved. We've sent you an email. Here's the link as well: " + link;
 		} else {
 			message = "Wisdom saved. Here's the link for future references: " + link + ". Keep it safe!";
