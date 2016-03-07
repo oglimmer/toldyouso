@@ -9,9 +9,11 @@ import javax.inject.Named;
 
 import de.oglimmer.db.SmartAssEntryDao;
 import de.oglimmer.model.SmartAssEntry;
+import de.oglimmer.util.Crypto;
 import de.oglimmer.util.EmailService;
 import de.oglimmer.util.LinkGenerator;
 import lombok.Getter;
+import lombok.Setter;
 
 @RequestScoped
 @Named
@@ -22,15 +24,33 @@ public class SaveEntryPortal implements Serializable {
 	@Inject
 	private SmartAssEntryDao dao;
 
+	@Inject
+	private LoginData loginData;
+
 	@Getter
 	private String message;
+	@Getter
+	@Setter
+	private boolean crypted;
 
 	@Getter
 	/* @Inject works here, but it just injects a proxy object which is not Serializeable by ektorp */
 	private SmartAssEntry smartAssEntry = new SmartAssEntry();
 
 	public String save() {
+
 		smartAssEntry.setCreationDate(new Date());
+		if (loginData.isLoggedIn()) {
+			smartAssEntry.setEmail(loginData.getEmail());
+			smartAssEntry.setCreatorId(loginData.getUser().getId());
+		}
+
+		if (crypted) {
+			String cryptedFact = Crypto.INSTANCE.cryptFact(smartAssEntry.getFact(), loginData.getPassword(),
+					loginData.getUser().getFactPassword(), loginData.getUser().getInitVector());
+			smartAssEntry.setFact(cryptedFact);
+			smartAssEntry.setEncrypted(true);
+		}
 
 		dao.add(smartAssEntry);
 

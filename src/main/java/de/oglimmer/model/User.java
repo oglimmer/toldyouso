@@ -2,30 +2,33 @@ package de.oglimmer.model;
 
 import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-
 import org.ektorp.support.CouchDbDocument;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Named
-@RequestScoped
-public class SmartAssEntry extends CouchDbDocument {
+@ToString
+public class User extends CouchDbDocument {
 
 	private static final long serialVersionUID = 1L;
 
-	private String fact;
-
 	private String email;
+
+	private String loginPassword;
 
 	private Date creationDate;
 
-	private boolean encrypted;
+	private Date lastLoginDate;
 
-	private String creatorId;
+	private int failedLogins;
+
+	private Date disabledUntil;
+
+	private String factPassword;
+
+	private byte[] initVector;
 
 }

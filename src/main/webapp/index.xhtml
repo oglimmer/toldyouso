@@ -23,14 +23,17 @@
 								<b:message for="fact"/>
 								<f:validateLength maximum="10000" minimum="5"/>
 							</b:inputTextarea>
-							<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}">
+							<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}" 
+								rendered="#{not loginData.loggedIn}">
 								<b:message for="email"/>
 								<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							</b:inputText>
+							<b:selectBooleanCheckbox id="crypted" value="#{saveEntryPortal.crypted}" rendered="#{loginData.loggedIn}" 
+								caption="Encrypt text (if you don't trust the administrators of this host ;)" />								
 						</p>
 						<p>
-							<b:commandButton value="Save »" action="#{saveEntryPortal.save()}" onclick="void(null);">
-		    				</b:commandButton>
+							<b:commandButton value="Save" icon="chevron-right" iconAlign="right" action="#{saveEntryPortal.save()}" 
+								onclick="void(null);"/>
 						</p>
 					</h:form>
 				</b:column>

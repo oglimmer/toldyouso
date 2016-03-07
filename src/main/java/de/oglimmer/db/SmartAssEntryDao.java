@@ -8,4 +8,6 @@ public interface SmartAssEntryDao {
 
 	SmartAssEntry get(String id);
 
+	void update(SmartAssEntry smartAssEntry);
+
 }

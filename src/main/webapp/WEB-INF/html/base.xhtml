@@ -17,6 +17,27 @@
 	<f:view transient="true">
 		<b:navBar brand="AndIToldYou.so" brandHref="#" inverse="true"
 			fixed="top">
+			<h:form styleClass="navbar-form navbar-right">
+				<h:panelGroup rendered="#{not loginData.loggedIn}">
+	                <div class="form-group">
+	                    <b:inputText value="#{loginData.email}" placeholder="Email" fieldSize="sm"/>
+	                </div>
+	                <div class="form-group">
+	                    <b:inputSecret value="#{loginData.password}" placeholder="Password" fieldSize="sm"/>
+	                </div> 
+	                #{' '}
+	                <b:commandButton action="#{loginData.login()}" value="Log in" look="success" icon="chevron-right" iconAlign="right"  onclick="void(null);" />
+	                #{' '}
+	                <b:button value="Register" outcome="register" look="success" icon="chevron-right" iconAlign="right" />
+                </h:panelGroup>
+				<h:panelGroup rendered="#{loginData.loggedIn}">
+					<!-- 
+					<b:button value="Prefs" outcome="preferences" look="success" icon="chevron-right" iconAlign="right" />
+					&#160;
+					 -->
+		            <b:commandButton action="#{loginData.logout()}" value="Log out" look="success" icon="chevron-right" iconAlign="right" onclick="void(null);" styleClass="navbar-right" />
+                </h:panelGroup>
+            </h:form>
 		</b:navBar>
 		<b:jumbotron>
 			<b:container>

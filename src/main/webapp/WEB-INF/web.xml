@@ -16,7 +16,7 @@
 
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Production</param-value>
+		<param-value>DEVELOPMENT</param-value>
 	</context-param>
 
 	<context-param>
@@ -26,7 +26,7 @@
 
 	<context-param>
 		<param-name>BootsFaces_THEME</param-name>
-		<param-value>cerulean</param-value>
+		<param-value>cosmo</param-value>
 	</context-param>
 
 	<servlet>

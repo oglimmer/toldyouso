@@ -12,7 +12,7 @@ import org.ektorp.DocumentNotFoundException;
 
 import de.oglimmer.db.SmartAssEntryDao;
 import de.oglimmer.model.SmartAssEntry;
-import lombok.Getter;
+import de.oglimmer.util.Crypto;
 import lombok.Setter;
 
 @RequestScoped
@@ -22,13 +22,32 @@ public class GetEntryPortal implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
+	private LoginData loginData;
+
+	@Inject
 	private SmartAssEntryDao dao;
 
 	@Setter
 	private String id;
 
-	@Getter
 	private SmartAssEntry smartAssEntry;
+
+	public boolean isShowbutton() {
+		if (loginData.getUser() == null) {
+			return false;
+		}
+		if (smartAssEntry == null) {
+			return true;
+		}
+		return loginData.getUser().getId().equals(smartAssEntry.getCreatorId());
+	}
+
+	public SmartAssEntry getSmartAssEntry() {
+		if (smartAssEntry == null && getId() != null) {
+			load();
+		}
+		return smartAssEntry;
+	}
 
 	public String getId() {
 		if (id != null) {
@@ -44,11 +63,43 @@ public class GetEntryPortal implements Serializable {
 		if (getId() != null && !getId().isEmpty()) {
 			try {
 				smartAssEntry = dao.get(getId());
+
+				if (smartAssEntry.isEncrypted()) {
+					if (loginData.isLoggedIn() && loginData.getEmail().equals(smartAssEntry.getEmail())) {
+						smartAssEntry
+								.setFact(Crypto.INSTANCE.decryptFact(smartAssEntry.getFact(), loginData.getPassword(),
+										loginData.getUser().getFactPassword(), loginData.getUser().getInitVector()));
+					}
+				}
+
 				return "display";
 			} catch (DocumentNotFoundException e) {
 			}
 		}
 		return "notFound";
+	}
+
+	public String decryptFact() {
+		load();
+		if (smartAssEntry.getCreatorId().equals(loginData.getUser().getId())) {
+			smartAssEntry.setEncrypted(false);
+			dao.update(smartAssEntry);
+		}
+		return "display?faces-redirect=true&id=" + id;
+	}
+
+	public String cryptFact() {
+		load();
+		if (smartAssEntry.getCreatorId().equals(loginData.getUser().getId())) {
+			String uncryptedFact = smartAssEntry.getFact();
+			String cryptedFact = Crypto.INSTANCE.cryptFact(uncryptedFact, loginData.getPassword(),
+					loginData.getUser().getFactPassword(), loginData.getUser().getInitVector());
+			smartAssEntry.setFact(cryptedFact);
+			smartAssEntry.setEncrypted(true);
+			dao.update(smartAssEntry);
+			smartAssEntry.setFact(uncryptedFact);
+		}
+		return "display?faces-redirect=true&id=" + id;
 	}
 
 }

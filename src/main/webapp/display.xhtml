@@ -29,5 +29,21 @@
 				by <h:outputText value="#{getEntryPortal.smartAssEntry.email}" />
 			</b:column>
 		</b:row>
+		<b:row>
+			<b:column col-md="12">
+				<h:form rendered="#{getEntryPortal.smartAssEntry.encrypted}">			
+					<h:inputHidden value="#{getEntryPortal.id}" /> 				
+					This entry is encrypted.
+					<h:outputText  value="And so only visible for you while logged in." rendered="#{loginData.user.id == getEntryPortal.smartAssEntry.creatorId}" />					
+					<b:commandButton look="warning" size="xs" value="Decrypt" icon="chevron-right" iconAlign="right" 
+						action="#{getEntryPortal.decryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>					
+				</h:form>
+				<h:form rendered="#{not getEntryPortal.smartAssEntry.encrypted}">			
+					<h:inputHidden value="#{getEntryPortal.id}" /> 				
+					<b:commandButton look="warning" size="xs" value="Encrypt" icon="chevron-right" iconAlign="right" 
+						action="#{getEntryPortal.cryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>					
+				</h:form>
+			</b:column>			
+		</b:row>
     </ui:define>
 </ui:composition>

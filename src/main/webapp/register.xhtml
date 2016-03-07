@@ -1,0 +1,58 @@
+<ui:composition template="/WEB-INF/html/base.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="content">
+    	<h:form>
+			<b:row rendered="#{not empty register.message}">
+				<b:column col-md="12">
+					<b:alert severity="success" closable="true">
+						<h:outputText value="#{register.message}" escape="false" />
+					</b:alert>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column  offset="2" col-sm="8" col-xs="12">
+					<h2>Register account</h2>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column  offset="2" col-sm="6" col-xs="12">
+					<b:inputText id="email" placeholder="Your email" fieldSize="sm" value="#{register.user.email}" required="true">
+						<b:message for="email"/>
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						<f:validator binding="#{emailValidator}"/>
+					</b:inputText>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column  offset="2" col-sm="6" col-xs="12">
+					<b:inputSecret id="password" placeholder="Your Password" fieldSize="sm" value="#{register.user.loginPassword}" required="true">
+						<b:message for="password"/>
+						<f:validateLength maximum="255" minimum="3"/>
+						<f:validator validatorId="passwordValidator" />
+						<f:attribute name="confirmPassword" value="#{confirmPassword}" />
+					</b:inputSecret>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column  offset="2" col-sm="6" col-xs="12">
+					<b:inputSecret id="password2" placeholder="Password verification" fieldSize="sm" binding="#{confirmPassword}" required="true">
+						<b:message for="password2"/>
+						<f:validateLength maximum="255" minimum="3"/>
+					</b:inputSecret>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column  offset="2" col-sm="6" col-xs="12">
+					<b:button value="Cancel" outcome="index" look="default" icon="chevron-right" iconAlign="right" />
+					#{' '}
+					<b:commandButton value="Save" look="primary" icon="chevron-right" iconAlign="right" action="#{register.save()}" onclick="void(null);" />
+				</b:column>
+			</b:row>
+		</h:form>
+    </ui:define>
+</ui:composition>
