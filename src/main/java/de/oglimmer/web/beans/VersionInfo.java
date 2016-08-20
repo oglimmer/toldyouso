@@ -2,6 +2,7 @@ package de.oglimmer.web.beans;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import de.oglimmer.utils.VersionFromManifest;
@@ -16,7 +17,8 @@ public class VersionInfo {
 
 	@PostConstruct
 	public void init() {
-		VersionFromManifest vfm = new VersionFromManifest("TYS");
+		VersionFromManifest vfm = new VersionFromManifest();
+		vfm.init(FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/META-INF/MANIFEST.MF"));
 		longVersion = vfm.getLongVersion();
 	}
 

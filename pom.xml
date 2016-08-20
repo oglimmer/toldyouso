@@ -62,9 +62,10 @@
 					<archiveClasses>false</archiveClasses>
 					<archive>
 						<manifestEntries>
-							<SVN-Revision-No>${buildNumber}</SVN-Revision-No>
-							<Creation-Date>${timestamp}</Creation-Date>
-							<TYS-Version>${project.version}</TYS-Version>
+							<git-commit>${buildNumber}</git-commit>
+							<git-url>${project.scm.url}</git-url>
+							<creation-date>${timestamp}</creation-date>
+							<project-version>${project.version}</project-version>
 						</manifestEntries>
 					</archive>
 				</configuration>
