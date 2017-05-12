@@ -13,16 +13,16 @@ public enum Configuration {
 
 	@SneakyThrows(value = IOException.class)
 	private Configuration() {
-		if (System.getProperty("cyc.properties") != null) {
-			try (FileInputStream fis = new FileInputStream(System.getProperty("cyc.properties"))) {
+		if (System.getProperty("toldyouso.properties") != null) {
+			try (FileInputStream fis = new FileInputStream(System.getProperty("toldyouso.properties"))) {
 				prop.load(fis);
-				System.out.println("Successfully loaded cyc.properties from " + System.getProperty("cyc.properties"));
+				System.out.println("Successfully loaded toldyouso.properties from " + System.getProperty("toldyouso.properties"));
 			}
 		}
 	}
 
 	public String getDomain() {
-		return prop.getProperty("toldyouso.domain", "http://anditoldyou.so");
+		return prop.getProperty("toldyouso.domain", "https://toldyouso.oglimmer.de");
 	}
 
 	public String getCouchDbHost() {
@@ -62,7 +62,7 @@ public enum Configuration {
 	}
 
 	public String getSmtpFrom() {
-		return prop.getProperty("smtp.from", "\"AndIToldYou.So robot\" <robot@anditoldyou.so>");
+		return prop.getProperty("smtp.from", "\"toldyouso robot\" <robot@toldyouso.oglimmer.de>");
 	}
 
 }
