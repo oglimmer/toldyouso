@@ -1,0 +1,9 @@
+{
+  "_id": "_design/User",
+  "language": "javascript",
+  "views": {
+    "by_email": {
+      "map": "function(doc) { if(doc.loginPassword) { emit(doc.email.toLowerCase(), doc._id) } }"
+    }
+  }
+}
