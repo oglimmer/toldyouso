@@ -1,7 +1,11 @@
 module.exports = {
 
   config: {
-    Name: "toldyouso"
+    Name: "toldyouso",
+    Vagrant: {
+      Box: 'ubuntu/xenial64',
+      Install: 'maven openjdk-8-jdk-headless docker.io'
+    }
   },
 
   software: {
