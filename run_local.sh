@@ -129,9 +129,9 @@ Details:
  -b local #do a local build, would respect -j
  -t couchdb:local #reuse a local, running CouchDB installation, does not start/stop this CouchDB
  -t couchdb:docker:[1.7|2] #start docker image \`couchdb:X\`
- -t tomcat:local:/usr/lib/tomcat #reuse tomcat installation from /usr/lib/tomcat, does not start/stop this tomcat
- -t tomcat:download:[7|8|9] #download tomcat version x and run this build within it, would respect -j
  -t tomcat:docker:[7|8|9] #start docker image \`tomcat:X\` and run this build within it
+ -t tomcat:download:[7|8|9] #download tomcat version x and run this build within it, would respect -j
+ -t tomcat:local:/usr/lib/tomcat #reuse tomcat installation from /usr/lib/tomcat, does not start/stop this tomcat
  -j version #can use any locally installed JDK, see /usr/libexec/java_home -V
 "
 
