@@ -1,6 +1,7 @@
 module.exports = {
 
   config: {
+    SchemaVersion: "1.0.0",
     Name: "toldyouso",
     Vagrant: {
       Box: 'ubuntu/xenial64',
@@ -9,7 +10,7 @@ module.exports = {
   },
 
   software: {
-    "toldyouso": {
+    toldyouso: {
       Source: "mvn",
       Artifact: "target/toldyouso.war",
       configFile: {
@@ -22,7 +23,7 @@ module.exports = {
       AfterBuild: [ "if [ \"$(jdk_version)\" -lt 9 ]; then mv -f pom.xml.bak pom.xml; fi" ]
     },
 
-    "couchdb": {
+    couchdb: {
     	Source: "couchdb",
     	CouchDB: {
     		Schema: "toldyouso",
@@ -30,7 +31,7 @@ module.exports = {
     	}
     },
 
-    "tomcat": {
+    tomcat: {
       Source: "tomcat",
       Deploy: "toldyouso"
     }
