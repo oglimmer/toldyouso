@@ -28,8 +28,10 @@ module.exports = {
       Artifact: "target/toldyouso.war",
       configFile: {
       	Name: "java.properties",
-        Connections: [ { Source:"couchdb", Line: "couchdb.host=$$VALUE$$" } ],
-      	Content: [ { Line: "toldyouso.domain=http://localhost:8080/toldyouso" } ],
+      	Content: [
+          { Line: "toldyouso.domain=http://localhost:8080/toldyouso" },
+          { Source:"couchdb", Line: "couchdb.host=$$VALUE$$" }
+        ],
       	AttachAsEnvVar: ["JAVA_OPTS", "-Dtoldyouso.properties=$$SELF_NAME$$"]
       },
       BeforeBuild: [ "if [ \"$(jdk_version)\" -lt 9 ]; then cp pom.xml pom.xml.bak; sed '/<!-- needed since Java 9 - START -->/,/<!-- needed since Java 9 - END -->/d' pom.xml.bak > pom.xml; fi" ],
