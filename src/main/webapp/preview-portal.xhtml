@@ -1,0 +1,16 @@
+<ui:composition template="/WEB-INF/html/base.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:b="http://bootsfaces.net/ui"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="content">
+      <!-- oh boy this is nasty...but GetServlet has urlPatterns="/" -->
+      <img src="https://raw.githubusercontent.com/oglimmer/toldyouso/master/src/main/webapp/images/preview.jpg" />
+      
+      <script type="text/javascript">
+        window.location.href = './index.xhtml';
+      </script>
+    </ui:define>
+</ui:composition>
