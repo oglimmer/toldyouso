@@ -12,7 +12,7 @@ public enum Configuration {
 	private Properties prop = new Properties();
 
 	@SneakyThrows(value = IOException.class)
-	private Configuration() {
+	Configuration() {
 		if (System.getProperty("toldyouso.properties") != null) {
 			try (FileInputStream fis = new FileInputStream(System.getProperty("toldyouso.properties"))) {
 				prop.load(fis);
@@ -34,11 +34,11 @@ public enum Configuration {
 	}
 
 	public String getCouchDbUser() {
-		return prop.getProperty("couchdb.user", "");
+		return prop.getProperty("couchdb.user", "admin");
 	}
 
 	public String getCouchDbPassword() {
-		return prop.getProperty("couchdb.password", "");
+		return prop.getProperty("couchdb.password", "password");
 	}
 
 	public String getSmtpHost() {
