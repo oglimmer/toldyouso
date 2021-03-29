@@ -24,6 +24,8 @@
 		<param-value>client</param-value>
 	</context-param>
 
+	<!-- PLACEHOLDER ENV_ENTRY -->
+
 	<context-param>
 		<param-name>BootsFaces_USETHEME</param-name>
 		<param-value>default</param-value>
