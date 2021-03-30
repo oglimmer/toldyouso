@@ -14,7 +14,7 @@ module.exports = {
       TestedWith: "3-jdk-11"
     },
     couchdb: {
-      TestedWith: "1.7 & 2"
+      TestedWith: "1.7 & 2 & 3"
     },
     tomcat: {
       Docker: "tomcat9-openjdk11-openj9",
@@ -39,7 +39,7 @@ module.exports = {
     },
 
     couchdb: {
-    	Source: "couchdb",
+      Source: "couchdb",
       //DockerImage: "oglimmer/pouchdb",
       DockerMemory: "200M",
     	CouchDB: {

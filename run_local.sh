@@ -284,7 +284,11 @@ TYPE_SOURCE_TOMCAT=download
 #---------------------
 
 if [ "$(uname)" = "Linux" ]; then
-	ADD_HOST_INTERNAL="--add-host host.docker.internal:$(ip -4 addr show scope global dev docker0 | grep inet | awk '{print $2}' | cut -d / -f 1)"
+  if [ -n "$WSL_DISTRO_NAME" ]; then
+    ADD_HOST_INTERNAL="--add-host host.docker.internal:$(ip -4 addr show scope global dev eth0 | grep inet | awk '{print $2}' | cut -d / -f 1)"
+  else
+	  ADD_HOST_INTERNAL="--add-host host.docker.internal:$(ip -4 addr show scope global dev docker0 | grep inet | awk '{print $2}' | cut -d / -f 1)"
+	fi
 fi
 
 mkdir -p localrun
@@ -473,9 +477,10 @@ if [ "$START_COUCHDB" = "YES" ]; then
 		if [ ! -f ".couchdbPid" ]; then
 			startDockerNetwork
 
-			verbosePrint "docker run --rm -d -p 5984:5984 -m 200M --net=toldyousonet --name=couchdb $ADD_HOST_INTERNAL   couchdb:$TYPE_SOURCE_COUCHDB_VERSION"
+			verbosePrint "docker run --rm -d -p 5984:5984 -m 200M --net=toldyousonet --name=couchdb $ADD_HOST_INTERNAL -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password  couchdb:$TYPE_SOURCE_COUCHDB_VERSION"
 			dockerContainerIDcouchdb=$(docker run --rm -d -p 5984:5984 \
 				-m 200M \
+				-e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password \
 				--net=toldyousonet --name=couchdb $ADD_HOST_INTERNAL \
 				couchdb:$TYPE_SOURCE_COUCHDB_VERSION)
 			echo "$dockerContainerIDcouchdb" >.couchdbPid
@@ -496,10 +501,13 @@ if [ "$START_COUCHDB" = "YES" ]; then
 		sleep 1
 	done
 
-	if [[ "$(curl -s http://localhost:5984/toldyouso)" =~ .*"error".*"not_found".* ]]; then
-		curl -X PUT http://localhost:5984/toldyouso
+	if [[ "$(curl -u 'admin:password' -s http://localhost:5984/toldyouso)" =~ .*"error".*"not_found".* ]]; then
 
-		curl -X POST -H "Content-Type: application/json" -d @src/couchdb/_design-User-view.json http://localhost:5984/toldyouso
+	  curl -u 'admin:password' -X PUT http://localhost:5984/_users
+
+		curl -u 'admin:password' -X PUT http://localhost:5984/toldyouso
+
+		curl -u 'admin:password' -X POST -H "Content-Type: application/json" -d @src/couchdb/_design-User-view.json http://localhost:5984/toldyouso
 
 	fi
 

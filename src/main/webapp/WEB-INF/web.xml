@@ -25,6 +25,11 @@
 	</context-param>
 
 	<!-- PLACEHOLDER ENV_ENTRY -->
+	<env-entry>
+		<env-entry-name>com.sun.faces.ClientStateSavingPassword</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>klhnsafgi78943hiuokgsdh4jdghui48SJGHH</env-entry-value>
+	</env-entry>
 
 	<context-param>
 		<param-name>BootsFaces_USETHEME</param-name>
