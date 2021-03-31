@@ -18,7 +18,7 @@ module.exports = {
     },
     tomcat: {
       Docker: "tomcat9-openjdk11-openj9",
-      TestedWith: "9"
+      TestedWith: "9 & 10"
     }
   },
 
@@ -33,9 +33,7 @@ module.exports = {
           { Source:"couchdb", Line: "couchdb.host=$$VALUE$$" }
         ],
       	AttachAsEnvVar: ["JAVA_OPTS", "-Dtoldyouso.properties=$$SELF_NAME$$"]
-      },
-      BeforeBuild: [ "if [ \"$(jdk_version)\" -lt 9 ]; then cp pom.xml pom.xml.bak; sed '/<!-- needed since Java 9 - START -->/,/<!-- needed since Java 9 - END -->/d' pom.xml.bak > pom.xml; fi" ],
-      AfterBuild: [ "if [ \"$(jdk_version)\" -lt 9 ]; then mv -f pom.xml.bak pom.xml; fi" ]
+      }
     },
 
     couchdb: {

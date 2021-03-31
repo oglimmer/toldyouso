@@ -3,9 +3,9 @@ package de.oglimmer.web.beans;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.oglimmer.db.SmartAssEntryDao;
 import de.oglimmer.model.SmartAssEntry;

@@ -2,9 +2,9 @@ package de.oglimmer.web.beans;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.oglimmer.db.UserDao;
 import de.oglimmer.model.User;

@@ -1,7 +1,7 @@
 package de.oglimmer.web;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 import de.oglimmer.db.couchdb.CouchDbUtil;
 import de.oglimmer.util.EmailService;

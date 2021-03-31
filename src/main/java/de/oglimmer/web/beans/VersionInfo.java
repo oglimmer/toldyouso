@@ -1,9 +1,9 @@
 package de.oglimmer.web.beans;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 
 import de.oglimmer.utils.VersionFromManifest;
 import lombok.Getter;
