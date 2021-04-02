@@ -14,7 +14,7 @@ import org.ektorp.DocumentNotFoundException;
 @RequestScoped
 @Named
 public class GetEntryPortal {
-	
+
     @Inject
     private LoginData loginData;
 
@@ -25,6 +25,10 @@ public class GetEntryPortal {
     private String id;
 
     private SmartAssEntry smartAssEntry;
+
+    public GetEntryPortal() {
+        System.out.println("Created GetEntryPortal");
+    }
 
     public boolean isShowbutton() {
         if (loginData.getUser() == null) {
@@ -40,6 +44,7 @@ public class GetEntryPortal {
         if (smartAssEntry == null && getId() != null) {
             load();
         }
+        System.out.println("getSmartAssEntry: " + smartAssEntry);
         return smartAssEntry;
     }
 

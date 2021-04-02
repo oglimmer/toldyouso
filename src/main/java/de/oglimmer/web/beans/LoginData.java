@@ -30,9 +30,18 @@ public class LoginData implements Serializable {
     @Getter
     @Setter
     private String password;
-    @Getter
+
     @Setter
     private User user;
+
+    public LoginData() {
+        System.out.println("Created LoginData");
+    }
+
+    public User getUser() {
+        System.out.println("getUser: " + user);
+        return user;
+    }
 
 	public String login() {
         UserDao userDao = BeanFetcher.getBean("userCouchDb");

@@ -16,7 +16,7 @@ import java.util.Date;
 @RequestScoped
 @Named
 public class SaveEntryPortal {
-    
+
     @Inject
     private SmartAssEntryDao dao;
 
@@ -32,6 +32,10 @@ public class SaveEntryPortal {
     @Getter
     /* @Inject works here, but it just injects a proxy object which is not Serializeable by ektorp */
     private SmartAssEntry smartAssEntry = new SmartAssEntry();
+
+    public SaveEntryPortal() {
+        System.out.println("Created SaveEntryPortal");
+    }
 
     public String save() {
 
