@@ -1,105 +1,99 @@
 package de.oglimmer.web.beans;
 
-import java.io.Serializable;
-
+import de.oglimmer.db.SmartAssEntryDao;
+import de.oglimmer.model.SmartAssEntry;
+import de.oglimmer.util.Crypto;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.ektorp.DocumentNotFoundException;
-
-import de.oglimmer.db.SmartAssEntryDao;
-import de.oglimmer.model.SmartAssEntry;
-import de.oglimmer.util.Crypto;
 import lombok.Setter;
+import org.ektorp.DocumentNotFoundException;
 
 @RequestScoped
 @Named
-public class GetEntryPortal implements Serializable {
+public class GetEntryPortal {
+	
+    @Inject
+    private LoginData loginData;
 
-	private static final long serialVersionUID = 1L;
+    @Inject
+    private SmartAssEntryDao dao;
 
-	@Inject
-	private LoginData loginData;
+    @Setter
+    private String id;
 
-	@Inject
-	private SmartAssEntryDao dao;
+    private SmartAssEntry smartAssEntry;
 
-	@Setter
-	private String id;
+    public boolean isShowbutton() {
+        if (loginData.getUser() == null) {
+            return false;
+        }
+        if (smartAssEntry == null) {
+            return true;
+        }
+        return loginData.getUser().getId().equals(smartAssEntry.getCreatorId());
+    }
 
-	private SmartAssEntry smartAssEntry;
+    public SmartAssEntry getSmartAssEntry() {
+        if (smartAssEntry == null && getId() != null) {
+            load();
+        }
+        return smartAssEntry;
+    }
 
-	public boolean isShowbutton() {
-		if (loginData.getUser() == null) {
-			return false;
-		}
-		if (smartAssEntry == null) {
-			return true;
-		}
-		return loginData.getUser().getId().equals(smartAssEntry.getCreatorId());
-	}
+    public String getId() {
+        if (id != null) {
+            return id;
+        } else {
+            HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+                    .getRequest();
+            return (String) req.getAttribute("id");
+        }
+    }
 
-	public SmartAssEntry getSmartAssEntry() {
-		if (smartAssEntry == null && getId() != null) {
-			load();
-		}
-		return smartAssEntry;
-	}
+    public String load() {
+        if (getId() != null && !getId().isEmpty()) {
+            try {
+                smartAssEntry = dao.get(getId());
 
-	public String getId() {
-		if (id != null) {
-			return id;
-		} else {
-			HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-					.getRequest();
-			return (String) req.getAttribute("id");
-		}
-	}
+                if (smartAssEntry.isEncrypted()) {
+                    if (loginData.isLoggedIn() && loginData.getEmail().equals(smartAssEntry.getEmail())) {
+                        smartAssEntry
+                                .setFact(Crypto.INSTANCE.decryptFact(smartAssEntry.getFact(), loginData.getPassword(),
+                                        loginData.getUser().getFactPassword(), loginData.getUser().getInitVector()));
+                    }
+                }
 
-	public String load() {
-		if (getId() != null && !getId().isEmpty()) {
-			try {
-				smartAssEntry = dao.get(getId());
+                return "display";
+            } catch (DocumentNotFoundException e) {
+            }
+        }
+        return "notFound";
+    }
 
-				if (smartAssEntry.isEncrypted()) {
-					if (loginData.isLoggedIn() && loginData.getEmail().equals(smartAssEntry.getEmail())) {
-						smartAssEntry
-								.setFact(Crypto.INSTANCE.decryptFact(smartAssEntry.getFact(), loginData.getPassword(),
-										loginData.getUser().getFactPassword(), loginData.getUser().getInitVector()));
-					}
-				}
+    public String decryptFact() {
+        load();
+        if (smartAssEntry.getCreatorId().equals(loginData.getUser().getId())) {
+            smartAssEntry.setEncrypted(false);
+            dao.update(smartAssEntry);
+        }
+        return "display?faces-redirect=true&id=" + id;
+    }
 
-				return "display";
-			} catch (DocumentNotFoundException e) {
-			}
-		}
-		return "notFound";
-	}
-
-	public String decryptFact() {
-		load();
-		if (smartAssEntry.getCreatorId().equals(loginData.getUser().getId())) {
-			smartAssEntry.setEncrypted(false);
-			dao.update(smartAssEntry);
-		}
-		return "display?faces-redirect=true&id=" + id;
-	}
-
-	public String cryptFact() {
-		load();
-		if (smartAssEntry.getCreatorId().equals(loginData.getUser().getId())) {
-			String uncryptedFact = smartAssEntry.getFact();
-			String cryptedFact = Crypto.INSTANCE.cryptFact(uncryptedFact, loginData.getPassword(),
-					loginData.getUser().getFactPassword(), loginData.getUser().getInitVector());
-			smartAssEntry.setFact(cryptedFact);
-			smartAssEntry.setEncrypted(true);
-			dao.update(smartAssEntry);
-			smartAssEntry.setFact(uncryptedFact);
-		}
-		return "display?faces-redirect=true&id=" + id;
-	}
+    public String cryptFact() {
+        load();
+        if (smartAssEntry.getCreatorId().equals(loginData.getUser().getId())) {
+            String uncryptedFact = smartAssEntry.getFact();
+            String cryptedFact = Crypto.INSTANCE.cryptFact(uncryptedFact, loginData.getPassword(),
+                    loginData.getUser().getFactPassword(), loginData.getUser().getInitVector());
+            smartAssEntry.setFact(cryptedFact);
+            smartAssEntry.setEncrypted(true);
+            dao.update(smartAssEntry);
+            smartAssEntry.setFact(uncryptedFact);
+        }
+        return "display?faces-redirect=true&id=" + id;
+    }
 
 }
