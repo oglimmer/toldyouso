@@ -1,5 +1,5 @@
 language: java
-script:
+before_install:
   - git clone https://github.com/oglimmer/BootsFaces-OSP.git
   - cd BootsFaces-OSP
   - mvn install -DskipTests=true
