@@ -1,0 +1,29 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Clone BootsFaces-OSP
+        run: |
+          git clone https://github.com/oglimmer/BootsFaces-OSP.git
+          cd BootsFaces-OSP
+          mvn install -DskipTests=true
+        shell: bash
+      - name: Build with Maven
+        run: mvn -B package
