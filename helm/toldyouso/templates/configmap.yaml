@@ -9,3 +9,9 @@ data:
     {{- range $key, $value := .Values.appConfig }}
     {{ $key }}={{ $value }}
     {{- end }}
+  redisson.yaml: |
+    codec: !<org.redisson.codec.SerializationCodec> {}
+    singleServerConfig:
+      address: "redis://{{ .Values.redis.host }}:{{ .Values.redis.port }}"
+      connectionMinimumIdleSize: 2
+      connectionPoolSize: 8

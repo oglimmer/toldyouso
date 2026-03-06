@@ -29,6 +29,10 @@ appConfig:
   smtp.port: "25"
   smtp.from: "\"toldyouso robot\" <robot@junta-online.net>"
 
+redis:
+  host: "redis-service.default.svc.cluster.local"
+  port: "6379"
+
 ingress:
   enabled: true
   annotations:

@@ -42,6 +42,10 @@ spec:
           mountPath: /tmp/toldyouso.properties
           subPath: toldyouso.properties
           readOnly: true
+        - name: config
+          mountPath: /usr/local/tomcat/conf/redisson.yaml
+          subPath: redisson.yaml
+          readOnly: true
         startupProbe:
           httpGet:
             path: /health.html

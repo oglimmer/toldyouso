@@ -29,6 +29,11 @@ services:
           -d '{"_id":"_design/User","language":"javascript","views":{"by_email":{"map":"function(doc) { if(doc.loginPassword) { emit(doc.email.toLowerCase(), doc._id) } }"}}}' \
           http://couchdb:5984/toldyouso || true
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
   toldyouso:
     build: .
     ports:
@@ -41,6 +46,8 @@ services:
     depends_on:
       couchdb-init:
         condition: service_completed_successfully
+      redis:
+        condition: service_started
 
 volumes:
   couchdb-data:

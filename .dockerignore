@@ -4,4 +4,6 @@ target/
 .dockerignore
 Dockerfile
 docker-compose.yml
-docker/
+docker/toldyouso.properties
+!docker/context.xml
+!docker/redisson.yaml

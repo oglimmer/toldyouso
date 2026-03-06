@@ -1,0 +1,5 @@
+codec: !<org.redisson.codec.SerializationCodec> {}
+singleServerConfig:
+  address: "redis://redis:6379"
+  connectionMinimumIdleSize: 2
+  connectionPoolSize: 8
