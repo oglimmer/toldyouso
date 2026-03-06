@@ -44,6 +44,9 @@ App available at `http://localhost:8080`.
   - `db/` — DAO interfaces; `db/couchdb/` — CouchDB implementations using Ektorp
   - `web/` — Servlet (`GetServlet` routes `/` and `/<id>` paths) and context listener
   - `web/beans/` — JSF managed beans (login, registration, save/get entry portals)
+  - `toldyouso/log/` — Logback configurator
   - `util/` — Configuration singleton, crypto (bcrypt), email service, link generation
 - **Routing:** `GetServlet` maps `/` — root goes to `index.xhtml`, any `/<id>` path forwards to `display.xhtml` to show a saved entry
 - **Lombok** is used for boilerplate reduction (provided scope)
+- **No tests** — the project has no unit or integration tests
+- **Deployment:** Multi-stage Dockerfile (Maven build → Tomcat 10.1 runtime). Helm chart in `helm/toldyouso/` for Kubernetes deployment
