@@ -7,15 +7,41 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
-	<title>toldyouso.oglimmer.com</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>toldyouso - Prove You Knew It</title>
 	<meta name="description" content="Save your early wisdom with an unmodifiable date and time and so secure a proof" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=yes" />
+	<h:outputStylesheet library="css" name="custom.css" />
+	<style>
+		/* Override BootsFaces input-sm sizing */
+		.input-sm, .form-control.input-sm { font-size: 17px !important; height: auto !important; padding: 14px 16px !important; border-radius: 8px !important; border: 1.5px solid #e5e5e5 !important; font-family: 'Inter', sans-serif !important; }
+		.form-control.input-sm:focus { border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,0.08) !important; }
+		textarea.input-sm, textarea.form-control.input-sm { min-height: 160px !important; line-height: 1.6 !important; }
+		/* Navbar inputs — readable but compact */
+		nav.navbar .input-sm, nav.navbar .form-control.input-sm { font-size: 15px !important; height: 42px !important; padding: 8px 14px !important; width: 180px !important; background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(255,255,255,0.12) !important; color: #fff !important; }
+		nav.navbar .form-control.input-sm:focus { border-color: #6366f1 !important; background: rgba(255,255,255,0.12) !important; box-shadow: none !important; }
+		nav.navbar .form-control.input-sm::placeholder { color: rgba(255,255,255,0.35) !important; }
+		/* Navbar */
+		nav.navbar.navbar-inverse { background: #111 !important; border: none !important; min-height: 64px !important; box-shadow: none !important; }
+		nav.navbar .navbar-brand, nav.navbar .navbar-brand span { font-size: 1.3rem !important; font-weight: 800 !important; color: #fff !important; letter-spacing: -0.03em !important; }
+		/* Buttons */
+		.btn { font-size: 16px !important; padding: 10px 22px !important; border-radius: 8px !important; font-weight: 500 !important; font-family: 'Inter', sans-serif !important; border: none !important; box-shadow: none !important; }
+		.btn-success, .btn-primary { background: #6366f1 !important; color: #fff !important; }
+		.btn-success:hover, .btn-primary:hover { background: #4f46e5 !important; }
+		.btn-default { background: #fff !important; color: #111 !important; border: 1px solid #e5e5e5 !important; }
+		.btn .glyphicon { font-size: 14px !important; }
+		/* Alerts */
+		.alert { font-size: 17px !important; padding: 16px 20px !important; border-radius: 8px !important; }
+		.alert-success { background: #f0fdf4 !important; color: #166534 !important; border: none !important; border-left: 3px solid #22c55e !important; }
+		/* Checkbox */
+		.checkbox label { font-size: 16px !important; }
+		/* Validation */
+		.bf-message, .help-block { font-size: 14px !important; color: #dc2626 !important; }
+	</style>
 </h:head>
-<!-- Add 50px padding top to the body for the navbar -->
-<h:body style="padding-top: 10px; padding-bottom: 20px;">
+<h:body>
 	<f:view>
-		<b:navBar brand="toldyouso.oglimmer.com" brandHref="/" inverse="true"
+		<b:navBar brand="toldyouso" brandHref="/" inverse="true"
 			fixed="top">
 			<h:form styleClass="navbar-form navbar-right">
 				<h:panelGroup rendered="#{not loginData.loggedIn}">
@@ -24,41 +50,35 @@
 	                </div>
 	                <div class="form-group">
 	                    <b:inputSecret value="#{loginData.password}" placeholder="Password" fieldSize="sm"/>
-	                </div> 
+	                </div>
 	                #{' '}
-	                <b:commandButton action="#{loginData.login()}" value="Log in" look="success" icon="chevron-right" iconAlign="right"  onclick="void(null);" />
+	                <b:commandButton action="#{loginData.login()}" value="Log in" look="success" icon="log-in" iconAlign="right" onclick="void(null);" />
 	                #{' '}
-	                <b:button value="Register" outcome="register" look="success" icon="chevron-right" iconAlign="right" />
+	                <b:button value="Register" outcome="register" look="success" icon="user" iconAlign="right" />
                 </h:panelGroup>
 				<h:panelGroup rendered="#{loginData.loggedIn}">
-					<!-- 
-					<b:button value="Prefs" outcome="preferences" look="success" icon="chevron-right" iconAlign="right" />
-					&#160;
-					 -->
-		            <b:commandButton action="#{loginData.logout()}" value="Log out" look="success" icon="chevron-right" iconAlign="right" onclick="void(null);" styleClass="navbar-right" />
+		            <b:commandButton action="#{loginData.logout()}" value="Log out" look="success" icon="log-out" iconAlign="right" onclick="void(null);" styleClass="navbar-right" />
                 </h:panelGroup>
             </h:form>
 		</b:navBar>
-		<b:jumbotron>
-			<b:container>
-				<h1>toldyouso.oglimmer.com</h1>
-				<p>Ever wanted to keep evidence of an "and I
-					knew it" situation? Save your early wisdom with an unmodifiable date and time and so 
-					secure a proof that you had known it ... and tell'em: AND I TOLD YOU SO!</p>
-        <p style="font-size: 9pm">
-          This page stores 2 session cookies. Also keep in mind that without a registration
-          you enter all data anonymously, so we won't be able to delete your input afterwards. You agree to those terms and conditions when
-          using this page.
-        </p>
-			</b:container>
-		</b:jumbotron>
-		<b:container>
+		<div style="background:#111;padding:56px 0 48px;">
+			<div style="max-width:680px;margin:0 auto;padding:0 20px;">
+				<h1 style="color:#fff;font-size:40px;font-weight:800;letter-spacing:-0.04em;margin:0 0 16px;line-height:1.1;font-family:Inter,sans-serif;">I Told You So.</h1>
+				<p style="color:rgba(255,255,255,0.55);font-size:18px;line-height:1.65;max-width:520px;margin:0;font-family:Inter,sans-serif;">Save your early wisdom with an unmodifiable timestamp.
+					Prove you knew it before anyone else believed you.
+					When the time comes, share the evidence.</p>
+				<p style="color:rgba(255,255,255,0.25);font-size:14px;margin:20px 0 0;line-height:1.5;font-family:Inter,sans-serif;">
+					This page stores 2 session cookies. Without registration, all data is anonymous
+					and cannot be deleted afterwards. By using this page you agree to these terms.
+				</p>
+			</div>
+		</div>
+		<b:container styleClass="content-section">
 			<ui:insert name="content">Default content</ui:insert>
-			<hr />
-			<footer>
-				<p>Build by oglimmer.com 2016-2026 - <h:outputText value="#{versionInfo.longVersion}" escape="false" /></p>
-			</footer>
 		</b:container>
+		<div class="site-footer" style="background:#111;color:rgba(255,255,255,0.25);text-align:center;padding:20px 16px;font-size:14px;margin-top:48px;font-family:Inter,sans-serif;">
+			<p style="margin:0;">Built by oglimmer.com 2016&#8211;2026 &#183; <h:outputText value="#{versionInfo.longVersion}" escape="false" /></p>
+		</div>
 	</f:view>
 </h:body>
 </html>

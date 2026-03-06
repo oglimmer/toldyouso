@@ -5,11 +5,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <ui:define name="content">      
-        <b:row>
-			<b:column col-md="12">
-				<h2>Evidence not found.</h2>
-			</b:column>
-		</b:row>        
+    <ui:define name="content">
+		<div style="text-align:center;padding:56px 20px;">
+			<h2 style="font-size:24px;font-weight:600;color:#555;font-family:Inter,sans-serif;">Evidence not found.</h2>
+			<p style="color:#999;margin-top:8px;font-size:16px;font-family:Inter,sans-serif;">
+				The prediction you're looking for doesn't exist or may have been removed.
+			</p>
+		</div>
     </ui:define>
 </ui:composition>

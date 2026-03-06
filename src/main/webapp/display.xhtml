@@ -11,39 +11,36 @@
 	</f:metadata>
 
     <ui:define name="content">
-        <b:row>
-			<b:column col-md="12">
-				<h2>Show evidence</h2>
-			</b:column>
-		</b:row>
-		<b:row>
-			<b:column col-md="12">
-				<h3><h:outputText value="#{getEntryPortal.smartAssEntry.fact}" /></h3>
-			</b:column>
-		</b:row>
-		<b:row>
-			<b:column col-md="6">
-				This was created on <h:outputText value="#{getEntryPortal.smartAssEntry.creationDate}" />
-			</b:column>
-			<b:column col-md="6" rendered="#{not empty getEntryPortal.smartAssEntry.email}">				
-				by <h:outputText value="#{getEntryPortal.smartAssEntry.email}" />
-			</b:column>
-		</b:row>
-		<b:row>
-			<b:column col-md="12">
-				<h:form rendered="#{getEntryPortal.smartAssEntry.encrypted}">			
-					<h:inputHidden value="#{getEntryPortal.id}" /> 				
-					This entry is encrypted.
-					<h:outputText  value="And so only visible for you while logged in." rendered="#{loginData.user.id == getEntryPortal.smartAssEntry.creatorId}" />					
-					<b:commandButton look="warning" size="xs" value="Decrypt" icon="chevron-right" iconAlign="right" 
-						action="#{getEntryPortal.decryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>					
+		<div class="evidence-card" style="background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:36px;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+			<div style="position:absolute;top:0;left:0;right:0;height:3px;background:#6366f1;border-radius:12px 12px 0 0;"></div>
+			<div style="font-size:22px;font-weight:500;line-height:1.6;color:#111;font-family:Inter,sans-serif;">
+				<h:outputText value="#{getEntryPortal.smartAssEntry.fact}" />
+			</div>
+			<div style="margin-top:24px;padding-top:18px;border-top:1px solid #e5e5e5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+				<span style="display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;font-weight:500;font-size:14px;background:#f0f0ff;color:#4f46e5;font-family:Inter,sans-serif;">
+					Created <h:outputText value="#{getEntryPortal.smartAssEntry.creationDate}" />
+				</span>
+				<h:panelGroup rendered="#{not empty getEntryPortal.smartAssEntry.email}">
+					<span style="display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;font-weight:500;font-size:14px;background:#fef9c3;color:#854d0e;font-family:Inter,sans-serif;">
+						by <h:outputText value="#{getEntryPortal.smartAssEntry.email}" />
+					</span>
+				</h:panelGroup>
+			</div>
+			<div style="margin-top:14px;">
+				<h:form rendered="#{getEntryPortal.smartAssEntry.encrypted}">
+					<h:inputHidden value="#{getEntryPortal.id}" />
+					<span style="color:#555;font-size:15px;font-family:Inter,sans-serif;">This entry is encrypted.</span>
+					<h:outputText value=" Only visible to you while logged in." rendered="#{loginData.user.id == getEntryPortal.smartAssEntry.creatorId}"
+						style="color:#555;font-size:15px;font-family:Inter,sans-serif;" />
+					<b:commandButton look="warning" value="Decrypt" icon="lock" iconAlign="right"
+						action="#{getEntryPortal.decryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>
 				</h:form>
-				<h:form rendered="#{not getEntryPortal.smartAssEntry.encrypted}">			
-					<h:inputHidden value="#{getEntryPortal.id}" /> 				
-					<b:commandButton look="warning" size="xs" value="Encrypt" icon="chevron-right" iconAlign="right" 
-						action="#{getEntryPortal.cryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>					
+				<h:form rendered="#{not getEntryPortal.smartAssEntry.encrypted}">
+					<h:inputHidden value="#{getEntryPortal.id}" />
+					<b:commandButton look="warning" value="Encrypt" icon="lock" iconAlign="right"
+						action="#{getEntryPortal.cryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>
 				</h:form>
-			</b:column>			
-		</b:row>
+			</div>
+		</div>
     </ui:define>
 </ui:composition>

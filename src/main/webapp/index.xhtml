@@ -7,36 +7,36 @@
 
     <ui:define name="content">
         <b:row rendered="#{not empty saveEntryPortal.message}">
-				<b:column col-md="12">
-					<b:alert severity="success" closable="true">
-						<h:outputText value="#{saveEntryPortal.message}" escape="false" />
-					</b:alert>
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column col-md="12">
-					<h2>Create evidence</h2>
-					<h:form>
-						<p>
-							<b:inputTextarea id="fact" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.fact}" required="true"
-								placeholder="Describe here what you already know, but someone else (currently) doesn't believe." >
-								<b:message for="fact"/>
-								<f:validateLength maximum="10000" minimum="5"/>
-							</b:inputTextarea>
-							<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}" 
-								rendered="#{not loginData.loggedIn}">
-								<b:message for="email"/>
-								<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-							</b:inputText>
-							<b:selectBooleanCheckbox id="crypted" value="#{saveEntryPortal.crypted}" rendered="#{loginData.loggedIn}" 
-								caption="Encrypt text (if you don't trust the administrators of this host ;)" />								
-						</p>
-						<p>
-							<b:commandButton value="Save" icon="chevron-right" iconAlign="right" action="#{saveEntryPortal.save()}" 
-								onclick="void(null);"/>
-						</p>
-					</h:form>
-				</b:column>
-			</b:row>
+			<b:column col-md="12">
+				<b:alert severity="success" closable="true">
+					<h:outputText value="#{saveEntryPortal.message}" escape="false" />
+				</b:alert>
+			</b:column>
+		</b:row>
+		<div style="background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+			<h2 style="font-size:20px;font-weight:700;color:#111;margin:0 0 20px;letter-spacing:-0.02em;padding-bottom:16px;border-bottom:1px solid #e5e5e5;font-family:Inter,sans-serif;">Create Evidence</h2>
+			<h:form>
+				<div class="form-group">
+					<b:inputTextarea id="fact" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.fact}" required="true"
+						placeholder="Describe here what you already know, but someone else doesn't believe yet...">
+						<b:message for="fact"/>
+						<f:validateLength maximum="10000" minimum="5"/>
+					</b:inputTextarea>
+				</div>
+				<div class="form-group">
+					<b:inputText id="email" placeholder="Your email (optional)" fieldSize="sm" value="#{saveEntryPortal.smartAssEntry.email}"
+						rendered="#{not loginData.loggedIn}">
+						<b:message for="email"/>
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</b:inputText>
+				</div>
+				<b:selectBooleanCheckbox id="crypted" value="#{saveEntryPortal.crypted}" rendered="#{loginData.loggedIn}"
+					caption="Encrypt text (if you don't trust the administrators of this host)" />
+				<div style="margin-top: 1.25rem;">
+					<b:commandButton value="Save Evidence" look="primary" icon="ok" iconAlign="right" action="#{saveEntryPortal.save()}"
+						onclick="void(null);"/>
+				</div>
+			</h:form>
+		</div>
     </ui:define>
 </ui:composition>

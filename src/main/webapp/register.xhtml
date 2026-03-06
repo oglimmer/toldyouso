@@ -7,55 +7,46 @@
 
     <ui:define name="content">
     	<h:form>
-			<b:row rendered="#{not empty register.message}">
-				<b:column col-md="12">
-					<b:alert severity="success" closable="true">
-						<h:outputText value="#{register.message}" escape="false" />
-					</b:alert>
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column  offset="2" col-sm="8" col-xs="12">
-					<h2>Register account</h2>
-          <p>
-            If you ever want to delete your account and/or your associated data, please write an email to &#111;&#103;&#108;&#105;&#109;&#109;&#101;&#114;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;
-          </p>
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column  offset="2" col-sm="6" col-xs="12">
+			<div style="background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:32px;max-width:440px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+				<h2 style="font-size:20px;font-weight:700;margin:0 0 6px;letter-spacing:-0.02em;font-family:Inter,sans-serif;">Create Account</h2>
+				<p style="color:#999;font-size:14px;margin:0 0 24px;line-height:1.5;font-family:Inter,sans-serif;">
+					To delete your account or associated data, email &#111;&#103;&#108;&#105;&#109;&#109;&#101;&#114;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;
+				</p>
+
+				<b:row rendered="#{not empty register.message}">
+					<b:column col-md="12">
+						<b:alert severity="success" closable="true">
+							<h:outputText value="#{register.message}" escape="false" />
+						</b:alert>
+					</b:column>
+				</b:row>
+
+				<div class="form-group">
 					<b:inputText id="email" placeholder="Your email" fieldSize="sm" value="#{register.user.email}" required="true">
 						<b:message for="email"/>
 						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						<f:validator binding="#{emailValidator}"/>
 					</b:inputText>
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column  offset="2" col-sm="6" col-xs="12">
-					<b:inputSecret id="password" placeholder="Your Password" fieldSize="sm" value="#{register.user.loginPassword}" required="true">
+				</div>
+				<div class="form-group">
+					<b:inputSecret id="password" placeholder="Password" fieldSize="sm" value="#{register.user.loginPassword}" required="true">
 						<b:message for="password"/>
 						<f:validateLength maximum="255" minimum="3"/>
 						<f:validator validatorId="passwordValidator" />
 						<f:attribute name="confirmPassword" value="#{confirmPassword}" />
 					</b:inputSecret>
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column  offset="2" col-sm="6" col-xs="12">
-					<b:inputSecret id="password2" placeholder="Password verification" fieldSize="sm" binding="#{confirmPassword}" required="true">
+				</div>
+				<div class="form-group">
+					<b:inputSecret id="password2" placeholder="Confirm password" fieldSize="sm" binding="#{confirmPassword}" required="true">
 						<b:message for="password2"/>
 						<f:validateLength maximum="255" minimum="3"/>
 					</b:inputSecret>
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column  offset="2" col-sm="6" col-xs="12">
-					<b:button value="Cancel" outcome="index" look="default" icon="chevron-right" iconAlign="right" />
-					#{' '}
-					<b:commandButton value="Save" look="primary" icon="chevron-right" iconAlign="right" action="#{register.save()}" onclick="void(null);" />
-				</b:column>
-			</b:row>
+				</div>
+				<div style="display:flex;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid #e5e5e5;">
+					<b:button value="Cancel" outcome="index" look="default" />
+					<b:commandButton value="Create Account" look="primary" icon="ok" iconAlign="right" action="#{register.save()}" onclick="void(null);" />
+				</div>
+			</div>
 		</h:form>
     </ui:define>
 </ui:composition>
