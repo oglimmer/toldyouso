@@ -1,0 +1,12 @@
+apiVersion: v2
+name: toldyouso
+description: A Helm chart for toldyouso - save timestamped predictions and prove "I told you so"
+type: application
+version: 1.0.0
+appVersion: "0.1"
+maintainers:
+  - name: oglimmer
+keywords:
+  - toldyouso
+  - java
+  - jsf

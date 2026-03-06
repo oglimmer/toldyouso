@@ -2,16 +2,16 @@
 
 Ever wanted to keep evidence of an "and I knew it" situation? Save your early wisdom with an unmodifiable date and time and so secure a proof that you had known it ... and tell'em: AND I TOLD YOU SO!
 
-How to test it
+How to run it
+-------------
+
+1.) Install docker
+
+2.) `docker compose up`
+
+3.) Browse to http://localhost:8080
+
+Build & deploy
 --------------
 
-1.) Install docker, java, mvn, curl
-
-2.) ./run_local -f
-
-3.) Browse to http://localhost:8080/toldyouso
-
-What's next?
-------------
-
-Give `./run_local -h` a try
+`./oglimmer.sh --help`

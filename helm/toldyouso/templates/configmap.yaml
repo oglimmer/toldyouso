@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "toldyouso.fullname" . }}-config
+  labels:
+    {{- include "toldyouso.labels" . | nindent 4 }}
+data:
+  toldyouso.properties: |
+    {{- range $key, $value := .Values.appConfig }}
+    {{ $key }}={{ $value }}
+    {{- end }}

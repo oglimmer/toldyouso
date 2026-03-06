@@ -62,7 +62,7 @@ public class SaveEntryPortal {
                 + LinkGenerator.INSTANCE.make(smartAssEntry.getId()) + "</a>";
 
         if (smartAssEntry.getEmail() != null && !smartAssEntry.getEmail().isEmpty()) {
-            EmailService.INSTANCE.createAndSendMailFile(smartAssEntry.getEmail(), "toldyouso.oglimmer.de record",
+            EmailService.INSTANCE.createAndSendMailFile(smartAssEntry.getEmail(), "toldyouso.oglimmer.com record",
                     "/creationEmail.txt", factInEmail, LinkGenerator.INSTANCE.make(smartAssEntry.getId()));
             message = "Wisdom saved. We've sent you an email. Here's the link as well: " + link;
         } else {

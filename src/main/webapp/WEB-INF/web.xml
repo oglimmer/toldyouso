@@ -3,7 +3,7 @@
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                       https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
-			 version="5.0"
+			 version="6.0"
 			 metadata-complete="false">
 
 	<session-config>
@@ -17,6 +17,11 @@
 	</resource-env-ref>
 
 	<!-- PLACEHOLDER ENV_ENTRY -->
+
+	<context-param>
+		<param-name>jakarta.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>client</param-value>
+	</context-param>
 
 	<context-param>
 		<param-name>BootsFaces_USETHEME</param-name>

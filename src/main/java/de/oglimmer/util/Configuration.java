@@ -22,7 +22,7 @@ public enum Configuration {
 	}
 
 	public String getDomain() {
-		return prop.getProperty("toldyouso.domain", "https://toldyouso.oglimmer.de");
+		return prop.getProperty("toldyouso.domain", "https://toldyouso.oglimmer.com");
 	}
 
 	public String getCouchDbHost() {
@@ -62,7 +62,7 @@ public enum Configuration {
 	}
 
 	public String getSmtpFrom() {
-		return prop.getProperty("smtp.from", "\"toldyouso robot\" <robot@toldyouso.oglimmer.de>");
+		return prop.getProperty("smtp.from", "\"toldyouso robot\" <robot@toldyouso.oglimmer.com>");
 	}
 
 }

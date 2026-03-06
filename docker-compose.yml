@@ -1,0 +1,46 @@
+services:
+  couchdb:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+    ports:
+      - "5984:5984"
+    volumes:
+      - couchdb-data:/opt/couchdb/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:5984/ || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  couchdb-init:
+    image: curlimages/curl:latest
+    depends_on:
+      couchdb:
+        condition: service_healthy
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        curl -sf -u admin:password -X PUT http://couchdb:5984/_users || true
+        curl -sf -u admin:password -X PUT http://couchdb:5984/toldyouso || true
+        curl -sf -u admin:password -X POST -H "Content-Type: application/json" \
+          -d '{"_id":"_design/User","language":"javascript","views":{"by_email":{"map":"function(doc) { if(doc.loginPassword) { emit(doc.email.toLowerCase(), doc._id) } }"}}}' \
+          http://couchdb:5984/toldyouso || true
+
+  toldyouso:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      JAVA_OPTS: >-
+        -Dtoldyouso.properties=/tmp/toldyouso.properties
+    volumes:
+      - ./docker/toldyouso.properties:/tmp/toldyouso.properties:ro
+    depends_on:
+      couchdb-init:
+        condition: service_completed_successfully
+
+volumes:
+  couchdb-data:
