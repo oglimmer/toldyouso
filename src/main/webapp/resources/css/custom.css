@@ -1,4 +1,4 @@
-/* === toldyouso — Clean Modern Theme === */
+/* === toldyouso — Clean Modern Theme (Bootstrap 5) === */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -20,62 +20,83 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     background: var(--bg) !important;
     color: var(--text) !important;
-    padding: 0 !important;
+    padding: 64px 0 0 0 !important;
     margin: 0 !important;
     font-size: 16px !important;
     -webkit-font-smoothing: antialiased;
 }
 
 /* === Navbar === */
-nav.navbar.navbar-inverse {
-    background: #111 !important;
-    border: none !important;
-    box-shadow: none !important;
-    min-height: 64px !important;
+.navbar {
+    background: var(--bg-dark) !important;
+    min-height: 64px;
     padding: 0 24px !important;
-    position: sticky !important;
-    top: 0;
     z-index: 100;
 }
-nav.navbar .navbar-brand,
-nav.navbar .navbar-brand span {
+.navbar-brand {
     font-weight: 800 !important;
     font-size: 1.3rem !important;
     color: #fff !important;
-    letter-spacing: -0.03em !important;
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
+    letter-spacing: -0.03em;
 }
-nav.navbar .navbar-form .form-group { margin: 0 6px !important; }
-nav.navbar .navbar-form .form-control,
-nav.navbar .navbar-form input[type="text"],
-nav.navbar .navbar-form input[type="password"],
-nav.navbar input.form-control {
+.navbar-brand:hover { color: #fff !important; }
+.navbar-input {
     background: rgba(255,255,255,0.08) !important;
     border: 1px solid rgba(255,255,255,0.12) !important;
     color: #fff !important;
     border-radius: 8px !important;
     padding: 8px 14px !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
     height: 42px !important;
     width: 180px !important;
-    transition: border-color 0.15s !important;
+    transition: border-color 0.15s;
     font-family: 'Inter', sans-serif !important;
 }
-nav.navbar .navbar-form .form-control:focus,
-nav.navbar .navbar-form input:focus {
-    border-color: #6366f1 !important;
+.navbar-input:focus {
+    border-color: var(--accent) !important;
     box-shadow: none !important;
     background: rgba(255,255,255,0.12) !important;
+    color: #fff !important;
 }
-nav.navbar .navbar-form .form-control::placeholder,
-nav.navbar .navbar-form input::placeholder { color: rgba(255,255,255,0.35) !important; }
+.navbar-input::placeholder { color: rgba(255,255,255,0.35) !important; }
+
+/* === Hero === */
+.hero-section {
+    background: var(--bg-dark);
+    padding: 56px 0 48px;
+}
+.hero-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.hero-title {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin: 0 0 16px;
+    line-height: 1.1;
+    font-family: Inter, sans-serif;
+}
+.hero-subtitle {
+    color: rgba(255,255,255,0.55);
+    font-size: 18px;
+    line-height: 1.65;
+    max-width: 520px;
+    margin: 0;
+    font-family: Inter, sans-serif;
+}
+.hero-disclaimer {
+    color: rgba(255,255,255,0.25);
+    font-size: 14px;
+    margin: 20px 0 0;
+    line-height: 1.5;
+    font-family: Inter, sans-serif;
+}
 
 /* === Buttons === */
-.btn,
-button.btn,
-a.btn,
-input.btn {
+.btn {
     border-radius: 8px !important;
     font-weight: 500 !important;
     font-size: 16px !important;
@@ -86,32 +107,27 @@ input.btn {
     line-height: 1.5 !important;
     box-shadow: none !important;
     font-family: 'Inter', sans-serif !important;
+    text-decoration: none !important;
 }
-.btn-success,
-.btn-primary,
-button.btn-success,
-button.btn-primary {
-    background: #6366f1 !important;
+.btn-primary {
+    background: var(--accent) !important;
     color: #fff !important;
 }
-.btn-success:hover, .btn-success:focus,
 .btn-primary:hover, .btn-primary:focus {
-    background: #4f46e5 !important;
+    background: var(--accent-hover) !important;
+    color: #fff !important;
 }
-.btn-default,
-button.btn-default,
-a.btn-default {
+.btn-outline-secondary {
     background: #fff !important;
-    color: #111 !important;
-    border: 1px solid #e5e5e5 !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
 }
-.btn-default:hover { background: #f5f5f5 !important; }
-.btn-warning { background: #f59e0b !important; color: #fff !important; }
-.btn-warning:hover { background: #d97706 !important; }
-.btn .glyphicon { font-size: 14px !important; opacity: 0.7; }
-
-/* Hide BootsFaces jumbotron if it renders */
-.jumbotron { display: none !important; }
+.btn-outline-secondary:hover { background: #f5f5f5 !important; }
+.btn-warning {
+    background: #f59e0b !important;
+    color: #fff !important;
+}
+.btn-warning:hover { background: #d97706 !important; color: #fff !important; }
 
 /* === Content === */
 .content-section { padding: 28px 0 16px; }
@@ -126,81 +142,47 @@ a.btn-default {
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .card-modern h2 {
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    color: var(--text) !important;
-    margin: 0 0 20px 0 !important;
-    letter-spacing: -0.02em !important;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 20px 0;
+    letter-spacing: -0.02em;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border);
+    font-family: Inter, sans-serif;
 }
 
-/* === Form — override Bootstrap input-sm === */
-.form-group { margin-bottom: 16px !important; }
-.input-sm,
-.form-control.input-sm,
-textarea.form-control.input-sm,
-input.form-control.input-sm,
-select.form-control.input-sm {
+/* === Forms === */
+.form-control {
     font-size: 17px !important;
-    height: auto !important;
     padding: 14px 16px !important;
     border-radius: 8px !important;
-    border: 1.5px solid #e5e5e5 !important;
+    border: 1.5px solid var(--border) !important;
     font-family: 'Inter', sans-serif !important;
-    background: #fff !important;
-    color: #111 !important;
     box-shadow: none !important;
-    line-height: 1.5 !important;
 }
-.form-control.input-sm:focus,
-textarea.form-control.input-sm:focus,
-input.form-control.input-sm:focus {
-    border-color: #6366f1 !important;
+.form-control:focus {
+    border-color: var(--accent) !important;
     box-shadow: 0 0 0 3px rgba(99,102,241,0.08) !important;
-    outline: none !important;
 }
-.form-control::placeholder, .input-sm::placeholder { color: #aaa !important; font-size: 17px !important; }
-textarea.form-control,
-textarea.form-control.input-sm {
+.form-control::placeholder { color: #aaa !important; }
+textarea.form-control {
     min-height: 160px !important;
-    resize: vertical !important;
-    line-height: 1.6 !important;
+    resize: vertical;
+    line-height: 1.6;
 }
-.checkbox label { font-size: 16px !important; color: #555 !important; }
-
-/* Navbar inputs — keep smaller but still readable */
-nav.navbar .input-sm,
-nav.navbar .form-control.input-sm,
-nav.navbar input.form-control.input-sm {
-    font-size: 15px !important;
-    height: 42px !important;
-    padding: 8px 14px !important;
-    width: 180px !important;
-    background: rgba(255,255,255,0.08) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    color: #fff !important;
-}
-nav.navbar .form-control.input-sm:focus,
-nav.navbar input.form-control.input-sm:focus {
-    border-color: #6366f1 !important;
-    background: rgba(255,255,255,0.12) !important;
-    box-shadow: none !important;
-}
-nav.navbar .form-control.input-sm::placeholder,
-nav.navbar input::placeholder { color: rgba(255,255,255,0.35) !important; font-size: 15px !important; }
+.form-check-label { font-size: 16px; color: var(--text-2); }
 
 /* === Alerts === */
 .alert {
     border-radius: 8px !important;
-    border: none !important;
-    font-size: 17px !important;
+    font-size: 17px;
     padding: 16px 20px !important;
-    margin-bottom: 20px !important;
 }
 .alert-success {
     background: #f0fdf4 !important;
     color: #166534 !important;
+    border: none !important;
     border-left: 3px solid var(--green) !important;
 }
 
@@ -216,19 +198,17 @@ nav.navbar input::placeholder { color: rgba(255,255,255,0.35) !important; font-s
 .evidence-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 3px;
     background: var(--accent);
     border-radius: var(--radius) var(--radius) 0 0;
 }
 .evidence-fact {
-    font-size: 22px !important;
-    font-weight: 500 !important;
-    line-height: 1.6 !important;
-    color: var(--text) !important;
-    margin-bottom: 0;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text);
+    font-family: Inter, sans-serif;
 }
 .evidence-meta {
     margin-top: 24px;
@@ -239,8 +219,7 @@ nav.navbar input::placeholder { color: rgba(255,255,255,0.35) !important; font-s
     gap: 10px;
     align-items: center;
 }
-.evidence-meta .date-badge,
-.evidence-meta .author-badge {
+.date-badge, .author-badge {
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -248,21 +227,16 @@ nav.navbar input::placeholder { color: rgba(255,255,255,0.35) !important; font-s
     border-radius: 6px;
     font-weight: 500;
     font-size: 14px;
+    font-family: Inter, sans-serif;
 }
-.evidence-meta .date-badge {
-    background: #f0f0ff;
-    color: var(--accent-hover);
-}
-.evidence-meta .author-badge {
-    background: #fef9c3;
-    color: #854d0e;
-}
+.date-badge { background: #f0f0ff; color: var(--accent-hover); }
+.author-badge { background: #fef9c3; color: #854d0e; }
 .evidence-actions { margin-top: 14px; }
 
 /* === Not Found === */
 .not-found-section { text-align: center; padding: 56px 20px; }
-.not-found-section h2 { font-size: 24px !important; font-weight: 600 !important; color: var(--text-2) !important; }
-.not-found-section p { font-size: 16px !important; }
+.not-found-section h2 { font-size: 24px; font-weight: 600; color: var(--text-2); font-family: Inter, sans-serif; }
+.not-found-section p { font-size: 16px; color: var(--text-3); font-family: Inter, sans-serif; }
 
 /* === Register === */
 .register-card {
@@ -275,18 +249,19 @@ nav.navbar input::placeholder { color: rgba(255,255,255,0.35) !important; font-s
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .register-card h2 {
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    margin: 0 0 6px 0 !important;
-    letter-spacing: -0.02em !important;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+    font-family: Inter, sans-serif;
 }
 .register-card > p {
-    color: var(--text-3) !important;
-    font-size: 14px !important;
-    margin: 0 0 24px 0 !important;
-    line-height: 1.5 !important;
+    color: var(--text-3);
+    font-size: 14px;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+    font-family: Inter, sans-serif;
 }
-.register-card .form-group { margin-bottom: 12px; }
 .btn-group-register {
     display: flex;
     gap: 10px;
@@ -295,17 +270,27 @@ nav.navbar input::placeholder { color: rgba(255,255,255,0.35) !important; font-s
     border-top: 1px solid var(--border);
 }
 
-/* === Footer links === */
-.site-footer a { color: rgba(255,255,255,0.4) !important; text-decoration: none !important; }
-.site-footer a:hover { color: rgba(255,255,255,0.6) !important; }
+/* === Footer === */
+.site-footer {
+    background: var(--bg-dark);
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+    padding: 20px 16px;
+    font-size: 14px;
+    margin-top: 48px;
+    font-family: Inter, sans-serif;
+}
+.site-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.site-footer a:hover { color: rgba(255,255,255,0.6); }
 
 /* === Validation === */
-.bf-message, .help-block { color: #dc2626 !important; font-size: 14px !important; margin-top: 4px !important; }
+.text-danger { font-size: 14px !important; margin-top: 4px; }
 
 /* === Responsive === */
 @media (max-width: 768px) {
     .card-modern, .evidence-card, .register-card { padding: 24px; }
-    .navbar .form-control, .navbar input[type="text"], .navbar input[type="password"] { width: 100% !important; }
+    .navbar-input { width: 100% !important; }
+    .hero-title { font-size: 32px; }
 }
 
 /* === Misc === */

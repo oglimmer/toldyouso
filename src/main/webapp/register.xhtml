@@ -1,50 +1,51 @@
 <ui:composition template="/WEB-INF/html/base.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="jakarta.faces.passthrough">
 
     <ui:define name="content">
     	<h:form>
-			<div style="background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:32px;max-width:440px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-				<h2 style="font-size:20px;font-weight:700;margin:0 0 6px;letter-spacing:-0.02em;font-family:Inter,sans-serif;">Create Account</h2>
-				<p style="color:#999;font-size:14px;margin:0 0 24px;line-height:1.5;font-family:Inter,sans-serif;">
+			<div class="register-card">
+				<h2>Create Account</h2>
+				<p>
 					To delete your account or associated data, email &#111;&#103;&#108;&#105;&#109;&#109;&#101;&#114;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;
 				</p>
 
-				<b:row rendered="#{not empty register.message}">
-					<b:column col-md="12">
-						<b:alert severity="success" closable="true">
-							<h:outputText value="#{register.message}" escape="false" />
-						</b:alert>
-					</b:column>
-				</b:row>
+				<h:panelGroup rendered="#{not empty register.message}">
+					<div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+						<h:outputText value="#{register.message}" escape="false" />
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</h:panelGroup>
 
-				<div class="form-group">
-					<b:inputText id="email" placeholder="Your email" fieldSize="sm" value="#{register.user.email}" required="true">
-						<b:message for="email"/>
+				<div class="mb-3">
+					<h:inputText id="email" pt:placeholder="Your email" styleClass="form-control" value="#{register.user.email}" required="true">
 						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						<f:validator binding="#{emailValidator}"/>
-					</b:inputText>
+					</h:inputText>
+					<h:message for="email" styleClass="form-text text-danger" />
 				</div>
-				<div class="form-group">
-					<b:inputSecret id="password" placeholder="Password" fieldSize="sm" value="#{register.user.loginPassword}" required="true">
-						<b:message for="password"/>
+				<div class="mb-3">
+					<h:inputSecret id="password" pt:placeholder="Password" styleClass="form-control" value="#{register.user.loginPassword}" required="true">
 						<f:validateLength maximum="255" minimum="3"/>
 						<f:validator validatorId="passwordValidator" />
 						<f:attribute name="confirmPassword" value="#{confirmPassword}" />
-					</b:inputSecret>
+					</h:inputSecret>
+					<h:message for="password" styleClass="form-text text-danger" />
 				</div>
-				<div class="form-group">
-					<b:inputSecret id="password2" placeholder="Confirm password" fieldSize="sm" binding="#{confirmPassword}" required="true">
-						<b:message for="password2"/>
+				<div class="mb-3">
+					<h:inputSecret id="password2" pt:placeholder="Confirm password" styleClass="form-control" binding="#{confirmPassword}" required="true">
 						<f:validateLength maximum="255" minimum="3"/>
-					</b:inputSecret>
+					</h:inputSecret>
+					<h:message for="password2" styleClass="form-text text-danger" />
 				</div>
-				<div style="display:flex;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid #e5e5e5;">
-					<b:button value="Cancel" outcome="index" look="default" />
-					<b:commandButton value="Create Account" look="primary" icon="ok" iconAlign="right" action="#{register.save()}" onclick="void(null);" />
+				<div class="btn-group-register">
+					<h:link outcome="index" styleClass="btn btn-outline-secondary">Cancel</h:link>
+					<h:commandLink action="#{register.save()}" styleClass="btn btn-primary">
+						Create Account <i class="bi bi-check-lg ms-1"></i>
+					</h:commandLink>
 				</div>
 			</div>
 		</h:form>

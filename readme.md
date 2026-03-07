@@ -16,7 +16,7 @@ Architecture
 
 - **Database:** CouchDB for persistent storage of users and entries
 - **Session store:** Redis via [Redisson](https://github.com/redisson/redisson) Tomcat session manager — HTTP sessions are stored in Redis instead of in-memory, allowing the app to scale horizontally across multiple replicas without sticky sessions
-- **UI:** JSF (Mojarra) with BootsFaces components
+- **UI:** JSF (Mojarra) with Bootstrap 5
 
 Kubernetes deployment
 ---------------------

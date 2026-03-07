@@ -19,11 +19,5 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
-      - name: Clone BootsFaces-OSP
-        run: |
-          git clone https://github.com/oglimmer/BootsFaces-OSP.git
-          cd BootsFaces-OSP
-          mvn install -DskipTests=true
-        shell: bash
       - name: Build with Maven
         run: mvn -B package

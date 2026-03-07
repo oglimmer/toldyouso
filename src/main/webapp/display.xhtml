@@ -1,6 +1,5 @@
 <ui:composition template="/WEB-INF/html/base.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
@@ -11,34 +10,35 @@
 	</f:metadata>
 
     <ui:define name="content">
-		<div class="evidence-card" style="background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:36px;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-			<div style="position:absolute;top:0;left:0;right:0;height:3px;background:#6366f1;border-radius:12px 12px 0 0;"></div>
-			<div style="font-size:22px;font-weight:500;line-height:1.6;color:#111;font-family:Inter,sans-serif;">
+		<div class="evidence-card">
+			<div class="evidence-fact">
 				<h:outputText value="#{getEntryPortal.smartAssEntry.fact}" />
 			</div>
-			<div style="margin-top:24px;padding-top:18px;border-top:1px solid #e5e5e5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-				<span style="display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;font-weight:500;font-size:14px;background:#f0f0ff;color:#4f46e5;font-family:Inter,sans-serif;">
+			<div class="evidence-meta">
+				<span class="date-badge">
 					Created <h:outputText value="#{getEntryPortal.smartAssEntry.creationDate}" />
 				</span>
 				<h:panelGroup rendered="#{not empty getEntryPortal.smartAssEntry.email}">
-					<span style="display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;font-weight:500;font-size:14px;background:#fef9c3;color:#854d0e;font-family:Inter,sans-serif;">
+					<span class="author-badge">
 						by <h:outputText value="#{getEntryPortal.smartAssEntry.email}" />
 					</span>
 				</h:panelGroup>
 			</div>
-			<div style="margin-top:14px;">
+			<div class="evidence-actions">
 				<h:form rendered="#{getEntryPortal.smartAssEntry.encrypted}">
 					<h:inputHidden value="#{getEntryPortal.id}" />
-					<span style="color:#555;font-size:15px;font-family:Inter,sans-serif;">This entry is encrypted.</span>
+					<span class="text-muted" style="font-size:15px;">This entry is encrypted.</span>
 					<h:outputText value=" Only visible to you while logged in." rendered="#{loginData.user.id == getEntryPortal.smartAssEntry.creatorId}"
-						style="color:#555;font-size:15px;font-family:Inter,sans-serif;" />
-					<b:commandButton look="warning" value="Decrypt" icon="lock" iconAlign="right"
-						action="#{getEntryPortal.decryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>
+						style="color:#555;font-size:15px;" />
+					<h:commandLink styleClass="btn btn-warning btn-sm ms-2" action="#{getEntryPortal.decryptFact}" rendered="#{getEntryPortal.showbutton}">
+						Decrypt <i class="bi bi-lock ms-1"></i>
+					</h:commandLink>
 				</h:form>
 				<h:form rendered="#{not getEntryPortal.smartAssEntry.encrypted}">
 					<h:inputHidden value="#{getEntryPortal.id}" />
-					<b:commandButton look="warning" value="Encrypt" icon="lock" iconAlign="right"
-						action="#{getEntryPortal.cryptFact}" onclick="void(null);" rendered="#{getEntryPortal.showbutton}"/>
+					<h:commandLink styleClass="btn btn-warning btn-sm" action="#{getEntryPortal.cryptFact}" rendered="#{getEntryPortal.showbutton}">
+						Encrypt <i class="bi bi-lock ms-1"></i>
+					</h:commandLink>
 				</h:form>
 			</div>
 		</div>

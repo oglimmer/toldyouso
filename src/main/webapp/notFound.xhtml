@@ -1,16 +1,13 @@
 <ui:composition template="/WEB-INF/html/base.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="content">
-		<div style="text-align:center;padding:56px 20px;">
-			<h2 style="font-size:24px;font-weight:600;color:#555;font-family:Inter,sans-serif;">Evidence not found.</h2>
-			<p style="color:#999;margin-top:8px;font-size:16px;font-family:Inter,sans-serif;">
-				The prediction you're looking for doesn't exist or may have been removed.
-			</p>
+		<div class="not-found-section">
+			<h2>Evidence not found.</h2>
+			<p>The prediction you're looking for doesn't exist or may have been removed.</p>
 		</div>
     </ui:define>
 </ui:composition>

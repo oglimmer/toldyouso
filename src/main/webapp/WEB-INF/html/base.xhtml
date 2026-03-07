@@ -1,84 +1,65 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="jakarta.faces.passthrough">
 <h:head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>toldyouso - Prove You Knew It</title>
 	<meta name="description" content="Save your early wisdom with an unmodifiable date and time and so secure a proof" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=yes" />
-	<h:outputStylesheet library="css" name="custom.css" />
-	<style>
-		/* Override BootsFaces input-sm sizing */
-		.input-sm, .form-control.input-sm { font-size: 17px !important; height: auto !important; padding: 14px 16px !important; border-radius: 8px !important; border: 1.5px solid #e5e5e5 !important; font-family: 'Inter', sans-serif !important; }
-		.form-control.input-sm:focus { border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,0.08) !important; }
-		textarea.input-sm, textarea.form-control.input-sm { min-height: 160px !important; line-height: 1.6 !important; }
-		/* Navbar inputs — readable but compact */
-		nav.navbar .input-sm, nav.navbar .form-control.input-sm { font-size: 15px !important; height: 42px !important; padding: 8px 14px !important; width: 180px !important; background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(255,255,255,0.12) !important; color: #fff !important; }
-		nav.navbar .form-control.input-sm:focus { border-color: #6366f1 !important; background: rgba(255,255,255,0.12) !important; box-shadow: none !important; }
-		nav.navbar .form-control.input-sm::placeholder { color: rgba(255,255,255,0.35) !important; }
-		/* Navbar */
-		nav.navbar.navbar-inverse { background: #111 !important; border: none !important; min-height: 64px !important; box-shadow: none !important; }
-		nav.navbar .navbar-brand, nav.navbar .navbar-brand span { font-size: 1.3rem !important; font-weight: 800 !important; color: #fff !important; letter-spacing: -0.03em !important; }
-		/* Buttons */
-		.btn { font-size: 16px !important; padding: 10px 22px !important; border-radius: 8px !important; font-weight: 500 !important; font-family: 'Inter', sans-serif !important; border: none !important; box-shadow: none !important; }
-		.btn-success, .btn-primary { background: #6366f1 !important; color: #fff !important; }
-		.btn-success:hover, .btn-primary:hover { background: #4f46e5 !important; }
-		.btn-default { background: #fff !important; color: #111 !important; border: 1px solid #e5e5e5 !important; }
-		.btn .glyphicon { font-size: 14px !important; }
-		/* Alerts */
-		.alert { font-size: 17px !important; padding: 16px 20px !important; border-radius: 8px !important; }
-		.alert-success { background: #f0fdf4 !important; color: #166534 !important; border: none !important; border-left: 3px solid #22c55e !important; }
-		/* Checkbox */
-		.checkbox label { font-size: 16px !important; }
-		/* Validation */
-		.bf-message, .help-block { font-size: 14px !important; color: #dc2626 !important; }
-	</style>
+	<link rel="stylesheet" href="#{request.contextPath}/webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/faces/jakarta.faces.resource/custom.css?ln=css" />
 </h:head>
 <h:body>
 	<f:view>
-		<b:navBar brand="toldyouso" brandHref="/" inverse="true"
-			fixed="top">
-			<h:form styleClass="navbar-form navbar-right">
-				<h:panelGroup rendered="#{not loginData.loggedIn}">
-	                <div class="form-group">
-	                    <b:inputText value="#{loginData.email}" placeholder="Email" fieldSize="sm"/>
-	                </div>
-	                <div class="form-group">
-	                    <b:inputSecret value="#{loginData.password}" placeholder="Password" fieldSize="sm"/>
-	                </div>
-	                #{' '}
-	                <b:commandButton action="#{loginData.login()}" value="Log in" look="success" icon="log-in" iconAlign="right" onclick="void(null);" />
-	                #{' '}
-	                <b:button value="Register" outcome="register" look="success" icon="user" iconAlign="right" />
-                </h:panelGroup>
-				<h:panelGroup rendered="#{loginData.loggedIn}">
-		            <b:commandButton action="#{loginData.logout()}" value="Log out" look="success" icon="log-out" iconAlign="right" onclick="void(null);" styleClass="navbar-right" />
-                </h:panelGroup>
-            </h:form>
-		</b:navBar>
-		<div style="background:#111;padding:56px 0 48px;">
-			<div style="max-width:680px;margin:0 auto;padding:0 20px;">
-				<h1 style="color:#fff;font-size:40px;font-weight:800;letter-spacing:-0.04em;margin:0 0 16px;line-height:1.1;font-family:Inter,sans-serif;">I Told You So.</h1>
-				<p style="color:rgba(255,255,255,0.55);font-size:18px;line-height:1.65;max-width:520px;margin:0;font-family:Inter,sans-serif;">Save your early wisdom with an unmodifiable timestamp.
+		<nav class="navbar navbar-dark fixed-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#{request.contextPath}/">toldyouso</a>
+				<h:form styleClass="d-flex align-items-center gap-2">
+					<h:panelGroup rendered="#{not loginData.loggedIn}">
+						<div class="d-flex align-items-center gap-2">
+							<h:inputText value="#{loginData.email}" pt:placeholder="Email" styleClass="form-control form-control-sm navbar-input" />
+							<h:inputSecret value="#{loginData.password}" pt:placeholder="Password" styleClass="form-control form-control-sm navbar-input" />
+							<h:commandLink action="#{loginData.login()}" styleClass="btn btn-primary btn-sm">
+								Log in <i class="bi bi-box-arrow-in-right ms-1"></i>
+							</h:commandLink>
+							<h:link outcome="register" styleClass="btn btn-primary btn-sm">
+								Register <i class="bi bi-person ms-1"></i>
+							</h:link>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{loginData.loggedIn}">
+						<h:commandLink action="#{loginData.logout()}" styleClass="btn btn-primary btn-sm">
+							Log out <i class="bi bi-box-arrow-right ms-1"></i>
+						</h:commandLink>
+					</h:panelGroup>
+				</h:form>
+			</div>
+		</nav>
+		<div class="hero-section">
+			<div class="hero-inner">
+				<h1 class="hero-title">I Told You So.</h1>
+				<p class="hero-subtitle">Save your early wisdom with an unmodifiable timestamp.
 					Prove you knew it before anyone else believed you.
 					When the time comes, share the evidence.</p>
-				<p style="color:rgba(255,255,255,0.25);font-size:14px;margin:20px 0 0;line-height:1.5;font-family:Inter,sans-serif;">
+				<p class="hero-disclaimer">
 					This page stores 2 session cookies. Without registration, all data is anonymous
 					and cannot be deleted afterwards. By using this page you agree to these terms.
 				</p>
 			</div>
 		</div>
-		<b:container styleClass="content-section">
+		<div class="container content-section">
 			<ui:insert name="content">Default content</ui:insert>
-		</b:container>
-		<div class="site-footer" style="background:#111;color:rgba(255,255,255,0.25);text-align:center;padding:20px 16px;font-size:14px;margin-top:48px;font-family:Inter,sans-serif;">
+		</div>
+		<div class="site-footer">
 			<p style="margin:0;">Built by oglimmer.com 2016&#8211;2026 &#183; <h:outputText value="#{versionInfo.longVersion}" escape="false" /></p>
 		</div>
 	</f:view>
+	<script src="#{request.contextPath}/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </h:body>
 </html>

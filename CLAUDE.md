@@ -16,8 +16,6 @@ mvn package          # produces target/toldyouso.war
 mvn clean package    # clean build
 ```
 
-**CI note:** The GitHub Actions build first clones and installs a custom BootsFaces fork (`oglimmer/BootsFaces-OSP`) before building. You may need to do this locally if the BootsFaces dependency isn't in your Maven cache.
-
 **Run locally (full stack via Docker Compose):**
 ```bash
 docker compose up     # builds app image, starts CouchDB + Tomcat
@@ -37,7 +35,7 @@ App available at `http://localhost:8080`.
 ## Architecture
 
 - **Java 21, Jakarta EE 10 (Faces 4.0, CDI 4.0)** — runs on Tomcat 10.1 with Weld 5 (CDI) and Mojarra 4 (JSF)
-- **UI:** BootsFaces (Bootstrap-based JSF component library) with XHTML Facelets templates in `src/main/webapp/`
+- **UI:** Standard JSF (Facelets) with Bootstrap 5 via WebJars, XHTML templates in `src/main/webapp/`
 - **Database:** CouchDB accessed via Ektorp library. CouchDB view definitions in `src/couchdb/`
 - **Key packages under `src/main/java/de/oglimmer/`:**
   - `model/` — Domain objects (`User`, `SmartAssEntry`)

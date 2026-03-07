@@ -23,16 +23,6 @@
 		<param-value>client</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>BootsFaces_USETHEME</param-name>
-		<param-value>default</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>BootsFaces_THEME</param-name>
-		<param-value>cosmo</param-value>
-	</context-param>
-
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
@@ -44,6 +34,10 @@
 	</servlet-mapping>
 
 	<!-- the default servlet serves the static resources in META-INF/resources -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/webjars/*</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/fonts/*</url-pattern>
