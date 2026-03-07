@@ -27,17 +27,17 @@
 			<div class="evidence-actions">
 				<h:form rendered="#{getEntryPortal.smartAssEntry.encrypted}">
 					<h:inputHidden value="#{getEntryPortal.id}" />
-					<span class="text-muted" style="font-size:15px;">This entry is encrypted.</span>
+					<span style="font-size:13px;color:var(--text-dim);letter-spacing:0.03em;text-transform:uppercase;">This entry is encrypted.</span>
 					<h:outputText value=" Only visible to you while logged in." rendered="#{loginData.user.id == getEntryPortal.smartAssEntry.creatorId}"
-						style="color:#555;font-size:15px;" />
+						style="color:var(--text-faint);font-size:13px;" />
 					<h:commandLink styleClass="btn btn-warning btn-sm ms-2" action="#{getEntryPortal.decryptFact}" rendered="#{getEntryPortal.showbutton}">
-						Decrypt <i class="bi bi-lock ms-1"></i>
+						Decrypt
 					</h:commandLink>
 				</h:form>
 				<h:form rendered="#{not getEntryPortal.smartAssEntry.encrypted}">
 					<h:inputHidden value="#{getEntryPortal.id}" />
 					<h:commandLink styleClass="btn btn-warning btn-sm" action="#{getEntryPortal.cryptFact}" rendered="#{getEntryPortal.showbutton}">
-						Encrypt <i class="bi bi-lock ms-1"></i>
+						Encrypt
 					</h:commandLink>
 				</h:form>
 			</div>

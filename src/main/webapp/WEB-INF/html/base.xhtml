@@ -8,7 +8,7 @@
 <h:head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>toldyouso - Prove You Knew It</title>
+	<title>toldyouso &#8212; Prove You Knew It</title>
 	<meta name="description" content="Save your early wisdom with an unmodifiable date and time and so secure a proof" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=yes" />
 	<link rel="stylesheet" href="#{request.contextPath}/webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
@@ -26,16 +26,16 @@
 							<h:inputText value="#{loginData.email}" pt:placeholder="Email" styleClass="form-control form-control-sm navbar-input" />
 							<h:inputSecret value="#{loginData.password}" pt:placeholder="Password" styleClass="form-control form-control-sm navbar-input" />
 							<h:commandLink action="#{loginData.login()}" styleClass="btn btn-primary btn-sm">
-								Log in <i class="bi bi-box-arrow-in-right ms-1"></i>
+								Log in
 							</h:commandLink>
-							<h:link outcome="register" styleClass="btn btn-primary btn-sm">
-								Register <i class="bi bi-person ms-1"></i>
+							<h:link outcome="register" styleClass="btn btn-outline-secondary btn-sm">
+								Register
 							</h:link>
 						</div>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{loginData.loggedIn}">
-						<h:commandLink action="#{loginData.logout()}" styleClass="btn btn-primary btn-sm">
-							Log out <i class="bi bi-box-arrow-right ms-1"></i>
+						<h:commandLink action="#{loginData.logout()}" styleClass="btn btn-outline-secondary btn-sm">
+							Log out
 						</h:commandLink>
 					</h:panelGroup>
 				</h:form>
