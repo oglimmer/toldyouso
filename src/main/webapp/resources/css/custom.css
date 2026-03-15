@@ -1,5 +1,85 @@
 /* === toldyouso — "The Sealed Record" === */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+/* --- Cormorant Garamond (local) --- */
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/cormorant-garamond/CormorantGaramond-Italic-400.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/cormorant-garamond/CormorantGaramond-Italic-500.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/cormorant-garamond/CormorantGaramond-Regular-400.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/cormorant-garamond/CormorantGaramond-Regular-500.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/cormorant-garamond/CormorantGaramond-Regular-600.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/cormorant-garamond/CormorantGaramond-Regular-700.ttf') format('truetype');
+}
+
+/* --- Source Sans 3 (local) --- */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../fonts/source-sans-3/SourceSans3-300.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/source-sans-3/SourceSans3-400.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/source-sans-3/SourceSans3-500.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/source-sans-3/SourceSans3-600.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/source-sans-3/SourceSans3-700.ttf') format('truetype');
+}
 
 :root {
     --void: #07060b;
