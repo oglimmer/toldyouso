@@ -418,6 +418,7 @@ textarea.form-control {
     line-height: 1.65;
     color: var(--cream);
     font-style: italic;
+    white-space: pre-wrap;
 }
 .evidence-meta {
     margin-top: 32px;
